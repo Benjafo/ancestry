@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="ancestry_tree_member_01" model="ancestry.tree.member">
+            <field name="name">Tommy Peacock</field>
+        </record>
+        <record id="ancestry_tree_member_02" model="ancestry.tree.member">
+            <field name="name">Connie Peacock</field>
+        </record>
+    </data>
+</odoo>      

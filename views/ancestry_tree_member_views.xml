@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Form View Definition -->
+        <record id="view_ancestry_tree_member_form" model="ir.ui.view">
+            <field name="name">ancestry.ancestry_tree_member_form</field>
+            <field name="model">ancestry.tree.member</field>
+            <field name="arch" type="xml">
+                <field name="status" invisible="1"/>
+                <!-- <field name="is_wizard_view" invisible="1"/> -->
+                <form>
+                    <header>
+                        <button name="confirm_ancestry_tree_member" type="object" class="btn-primary" 
+                                attrs="{'invisible':[('status', '=', 'confirmed')]}">Confirm</button>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box" attrs="{'invisible':[('status', '!=', 'confirmed')]}">
+                            <button name="show_profile" type="object" class="oe_stat_button" >
+                            <!-- attrs="{'invisible':[('is_wizard_view', '!=', 'confirmed')]}"> -->
+                                <div class="o_field_widget o_stat_info">
+                                    <span class="o_stat_text">Edit<br/>Profile</span>
+                                </div>
+                            </button>
+                            <button name="show_related_tree" type="object" class="oe_stat_button">
+                                <div class="o_field_widget o_stat_info">
+                                    <span class="o_stat_text">Related<br/>Tree</span>
+                                </div>
+                            </button>
+                        </div>
+                        <h1><field name="name" attrs="{'readonly':[('status', '=', 'confirmed')]}"/></h1>
+                        <group>
+                            <separator string="Primary Info"/>
+                            <group>
+                                <field name="description"/>
+                            </group>
+                            <group>
+                                <field name="date_birth"/>
+                                <field name="date_death"/>
+                                <field name="is_living"/>
+                            </group>
+                        </group>
+                        <group>
+                            <separator string="Family Relations"/>
+                            <group>
+                                <group>
+                                    <field name="mother"/>
+                                    <field name="father"/>
+                                </group>
+                                <group>
+                                    <field name="children"/>
+                                </group>
+                            </group>
+                            <group>
+                                <group>
+                                    <field name="spouse_m"/>
+                                </group>
+                                <group>
+                                    <field name="spouse_f"/>
+                                </group>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Events">
+                                <label for="events">Events</label>
+                                <field name="events"/>
+                            </page>
+                            <page string="Sources">
+                                <label for="sources">Sources</label>
+                                <field name="sources"/>
+                            </page>
+                            <page string="Gallery">
+                                <label for="images" string="Put together a series of images to form a slideshow."/>
+                                <br/><br/><label for="images" string="Image Gallery"/>
+                                <field name="images"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>
