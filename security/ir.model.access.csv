@@ -1,13 +1,13 @@
 id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
 ancestry_admin_main,ancestry admin,model_ancestry_ancestry,group_ancestry_admin,1,1,1,1
+ancestry_admin_event,ancestry admin,model_ancestry_event,group_ancestry_admin,1,1,1,1
+ancestry_admin_media,ancestry admin,model_ancestry_media,group_ancestry_admin,1,1,1,1
+ancestry_admin_source,ancestry admin,model_ancestry_source,group_ancestry_admin,1,1,1,1
 ancestry_admin_tree,ancestry admin,model_ancestry_tree,group_ancestry_admin,1,1,1,1
 ancestry_admin_tree_member,ancestry admin,model_ancestry_tree_member,group_ancestry_admin,1,1,1,1
-ancestry_admin_event,ancestry admin,model_ancestry_event,group_ancestry_admin,1,1,1,1
-ancestry_admin_source,ancestry admin,model_ancestry_source,group_ancestry_admin,1,1,1,1
-ancestry_admin_image,ancestry admin,model_ancestry_image,group_ancestry_admin,1,1,1,1
 ancestry_user_main,ancestry user,model_ancestry_ancestry,group_ancestry_user,1,0,1,0
+ancestry_user_event,ancestry admin,model_ancestry_event,group_ancestry_user,1,0,1,0
+ancestry_user_media,ancestry admin,model_ancestry_media,group_ancestry_user,1,0,1,0
+ancestry_user_source,ancestry admin,model_ancestry_source,group_ancestry_user,1,0,1,0
 ancestry_user_tree,ancestry user,model_ancestry_tree,group_ancestry_user,1,0,1,0
 ancestry_user_tree_member,ancestry user,model_ancestry_tree_member,group_ancestry_user,1,0,1,0
-ancestry_user_event,ancestry admin,model_ancestry_event,group_ancestry_user,1,0,1,0
-ancestry_user_source,ancestry admin,model_ancestry_source,group_ancestry_user,1,0,1,0
-ancestry_user_image,ancestry admin,model_ancestry_image,group_ancestry_user,1,0,1,0

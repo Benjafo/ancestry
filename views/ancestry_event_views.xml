@@ -21,6 +21,7 @@
                             </button>
                         </div>
                         <group>
+                            <field name="status" invisible="1"/>
                             <separator string="Add fact or event"/>
                             <field name="event_type"/>
                             <field name="event_custom_label" attrs="{'invisible':[('event_type', '!=', 'custom')]}"/>

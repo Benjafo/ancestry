@@ -6,7 +6,6 @@
             <field name="name">ancestry.ancestry_tree_member_form</field>
             <field name="model">ancestry.tree.member</field>
             <field name="arch" type="xml">
-                <!-- <field name="is_wizard_view" invisible="1"/> -->
                 <form>
                     <field name="status" invisible="1"/>
                     <!-- <header>
@@ -28,43 +27,52 @@
                         </div>
                         <h1><field name="name" attrs="{'readonly':[('status', '=', 'confirmed')]}"/></h1>
                         <group>
-                            <separator string="Primary Info"/>
                             <group>
+                                <field name="status" invisible="1"/>
+                                <separator string="Primary Info"/>
                                 <field name="description"/>
-                            </group>
-                            <group>
                                 <field name="date_birth"/>
                                 <field name="date_death"/>
                                 <field name="is_living"/>
                             </group>
-                        </group>
-                        <group>
-                            <separator string="Family Relations"/>
                             <group>
-                                <group>
-                                    <field name="mother"/>
-                                    <field name="father"/>
-                                </group>
-                                <group>
-                                    <field name="children"/>
-                                </group>
-                            </group>
-                            <group>
+                                <separator string="Family Relations"/>
+                                <field name="mother"/>
+                                <field name="father"/>
+                                <field name="children"/>
                                 <field name="spouses"/>
                             </group>
                         </group>
                         <notebook>
                             <page string="Events">
                                 <label for="events">Events</label>
-                                <field name="events"/>
+                                <field name="events">
+                                    <tree>
+                                        <field name="event_type"/>
+                                        <field name="event_date"/>
+                                        <field name="event_location"/>
+                                    </tree>
+                                </field>
                             </page>
                             <page string="Sources">
                                 <label for="sources">Sources</label>
-                                <field name="sources"/>
+                                <field name="sources">
+                                    <tree>
+                                        <field name="caption"/>
+                                        <field name="file_name"/>
+                                    </tree>
+                                </field>
                             </page>
                             <page string="Gallery">
-                                <label for="images" string="Image Gallery"/>
-                                <field name="images"/>
+                                <label for="images">Media Gallery</label>
+                                <field name="images">
+                                    <tree>
+                                        <field name="title"/>
+                                        <field name="file_name"/>
+                                        <field name="media_date"/>
+                                        <field name="media_location"/>
+                                    </tree>
+                                </field>
                             </page>
                         </notebook>
                     </sheet>

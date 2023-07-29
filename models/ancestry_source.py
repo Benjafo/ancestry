@@ -2,11 +2,13 @@ from odoo import api, fields, models
 
 class AncestrySource(models.Model):
     _name = 'ancestry.source'
+    _description = 'Model to represent a file or historical document that is referenced by a tree member\'s profile'
 
     # title = fields.Char(string="Source", required=True)
 
-    file = fields.Binary(string="File")
     caption = fields.Char(string="Caption", required=True, default="[image caption]")
+    file = fields.Binary(string="File", attachment=True)
+    file_name = fields.Char(string="File Name")
     
     #technical
     tree_member_id = fields.Many2one(string="Tree ID", comodel_name="ancestry.tree.member")
@@ -15,7 +17,7 @@ class AncestrySource(models.Model):
     def confirm_ancestry_source(self):
         # ensure default not selected
         self.ensure_one()
-        # assert self.event_type != ""
+        # assert self.source_type != ""
         # assign tree member id
         member_id = self.env.context.get('active_id')
         self.tree_member_id = self.env['ancestry.tree.member'].search([('id', '=', member_id)])

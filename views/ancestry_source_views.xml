@@ -21,8 +21,14 @@
                             </button>
                         </div>
                         <group>
-                            <separator string="Upload Files"/>
-                            <field name="file"/>
+                            <field name="status" invisible="1"/>
+                            <separator string="Upload File"/>
+                            <group>
+                                <field name="caption"/>
+                            </group>
+                            <group>
+                                <field name="file"/>
+                            </group>
                         </group>
                     </sheet>
                 </form>

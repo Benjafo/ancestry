@@ -2,6 +2,7 @@ from odoo import api, fields, models
 
 class AncestryTree(models.Model):
     _name = 'ancestry.tree'
+    _description = 'Model to represent a family tree and its members'
 
     ancestry_base = fields.One2many(string="Base Ancestry Ref", comodel_name="ancestry.ancestry", inverse_name="family_tree")
     family_name = fields.Char(string="Family Name", compute="_compute_family_name")
@@ -29,6 +30,7 @@ class AncestryTree(models.Model):
 
 class AncestryTreeMember(models.Model):
     _name = 'ancestry.tree.member'
+    _description = 'Model to represent a member of a family tree'
 
     #primary info
     name = fields.Char(string="Name", default="New", required=True)
@@ -46,15 +48,14 @@ class AncestryTreeMember(models.Model):
     #family info
     mother = fields.Many2one(string="Mother", comodel_name="ancestry.tree.member")
     father = fields.Many2one(string="Father", comodel_name="ancestry.tree.member")
-    # siblings = fields.One2many(string="Siblings", comodel_name="ancestry.tree.member")
-    spouses = fields.Many2many(string="Spouses", comodel_name="ancestry.tree.member", relation="spouses", column1='spouse_male', column2='spouse_female')
-    # spouse_f = fields.Many2many(comodel_name="ancestry.tree.member", relation="spouses", 'spouse_female', 'spouse_male', string="Spouse (F)")
+    siblings = fields.Many2many("ancestry.tree.member", "siblings", "sibling_one", "sibling_two", string="Siblings")
+    spouses = fields.Many2many("ancestry.tree.member", "spouses", 'spouse_one', 'spouse_two', string="Spouses")
     children = fields.One2many(string="Children", comodel_name="ancestry.tree.member", inverse_name="mother", compute="_update_children")
 
     #additional info
     events = fields.One2many(string="Life Events", comodel_name="ancestry.event", inverse_name="tree_member_id")
     sources = fields.One2many(string="Sources", comodel_name="ancestry.source", inverse_name="tree_member_id")
-    images = fields.One2many(string="Image Gallery", comodel_name="ancestry.image", inverse_name="tree_member_id")
+    images = fields.One2many(string="Image Gallery", comodel_name="ancestry.media", inverse_name="tree_member_id")
 
     #technical
     tree_id = fields.Many2one(string="Related Tree", comodel_name="ancestry.tree")
