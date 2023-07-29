@@ -11,8 +11,8 @@ class AncestrySource(models.Model):
     file_name = fields.Char(string="File Name")
     
     #technical
-    status = fields.Selection([("unconfirmed","Unconfirmed"),("confirmed","Confirmed")], string="Status", default="unconfirmed")
     tree_member_id = fields.Many2one(string="Tree ID", comodel_name="ancestry.tree.member")
+    status = fields.Selection([("unconfirmed","Unconfirmed"),("confirmed","Confirmed")], string="Status", default="unconfirmed")
 
     def confirm_ancestry_source(self):
         # ensure default not selected

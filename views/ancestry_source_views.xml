@@ -7,6 +7,7 @@
             <field name="model">ancestry.source</field>
             <field name="arch" type="xml">
                 <form>
+                    <field name="status" invisible="1"/>
                     <header>
                         <button name="confirm_ancestry_source" type="object" class="btn-primary" 
                                 attrs="{'invisible':[('status', '=', 'confirmed')]}">Confirm</button>

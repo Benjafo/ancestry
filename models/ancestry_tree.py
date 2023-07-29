@@ -4,13 +4,19 @@ class AncestryTree(models.Model):
     _name = 'ancestry.tree'
     _description = 'Model to represent a family tree and its members'
 
-    family_name = fields.Char(string="Family Name")
+    ancestry_base = fields.One2many(string="Base Ancestry Ref", comodel_name="ancestry.ancestry", inverse_name="family_tree")
+    family_name = fields.Char(string="Family Name", compute="_compute_family_name")
+    display_name = fields.Char(string="Display Name", compute="_compute_display_name")
     family_members = fields.One2many(string="Family Members", comodel_name="ancestry.tree.member", inverse_name="tree_id")
-    display_name = fields.Char(compute="_compute_display_name")
 
-    def _compute_display_name(self):
+    def _compute_family_name(self):
         for tree in self:
-            tree.display_name = tree.family_name + " Tree"
+            tree.family_name = tree.ancestry_base.family_name + " Tree"
+            
+    def _compute_display_name(self):
+        for record in self:
+            if record.family_name:
+                record.display_name = record.family_name
 
     def add_ancestry_tree_member(self):
         return {

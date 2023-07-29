@@ -7,14 +7,14 @@
             <field name="model">ancestry.tree.member</field>
             <field name="arch" type="xml">
                 <form>
-                    <header>
+                    <field name="status" invisible="1"/>
+                    <!-- <header>
                         <button name="confirm_ancestry_tree_member" type="object" class="btn-primary" 
                                 attrs="{'invisible':[('status', '=', 'confirmed')]}">Confirm</button>
-                    </header>
+                    </header> -->
                     <sheet>
                         <div class="oe_button_box" name="button_box" attrs="{'invisible':[('status', '!=', 'confirmed')]}">
                             <button name="show_profile" type="object" class="oe_stat_button" >
-                            <!-- attrs="{'invisible':[('is_wizard_view', '!=', 'confirmed')]}"> -->
                                 <div class="o_field_widget o_stat_info">
                                     <span class="o_stat_text">Edit<br/>Profile</span>
                                 </div>
