@@ -6,8 +6,8 @@
             <field name="name">ancestry.ancestry_event_form</field>
             <field name="model">ancestry.event</field>
             <field name="arch" type="xml">
-                <field name="status" invisible="1"/>
                 <form>
+                    <field name="status" invisible="1"/>
                     <header>
                         <button name="confirm_ancestry_event" type="object" class="btn-primary" 
                                 attrs="{'invisible':[('status', '=', 'confirmed')]}">Confirm</button>

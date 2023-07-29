@@ -18,15 +18,16 @@
         'security/ir.model.access.csv',
         'views/ancestry_event_views.xml',
         'views/ancestry_tree_member_views.xml',
+        'views/ancestry_source_views.xml',
         'views/ancestry_tree_views.xml',
         'views/ancestry_views.xml',
     ],
     
-    "demo": [
-        "demo/ancestry_ancestry_demo.xml",
-        "demo/ancestry_tree_demo.xml",
-        "demo/ancestry_tree_member_demo.xml",
-    ],
+    # 'demo': [
+    #     'demo/ancestry_ancestry_demo.xml',
+    #     'demo/ancestry_tree_demo.xml',
+    #     'demo/ancestry_tree_member_demo.xml',
+    # ],
 
     'license': 'LGPL-3',
 

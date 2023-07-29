@@ -6,17 +6,16 @@
             <field name="name">ancestry.ancestry_tree_member_form</field>
             <field name="model">ancestry.tree.member</field>
             <field name="arch" type="xml">
-                <field name="status" invisible="1"/>
                 <!-- <field name="is_wizard_view" invisible="1"/> -->
                 <form>
-                    <header>
+                    <field name="status" invisible="1"/>
+                    <!-- <header>
                         <button name="confirm_ancestry_tree_member" type="object" class="btn-primary" 
                                 attrs="{'invisible':[('status', '=', 'confirmed')]}">Confirm</button>
-                    </header>
+                    </header> -->
                     <sheet>
                         <div class="oe_button_box" name="button_box" attrs="{'invisible':[('status', '!=', 'confirmed')]}">
                             <button name="show_profile" type="object" class="oe_stat_button" >
-                            <!-- attrs="{'invisible':[('is_wizard_view', '!=', 'confirmed')]}"> -->
                                 <div class="o_field_widget o_stat_info">
                                     <span class="o_stat_text">Edit<br/>Profile</span>
                                 </div>
@@ -51,12 +50,7 @@
                                 </group>
                             </group>
                             <group>
-                                <group>
-                                    <field name="spouse_m"/>
-                                </group>
-                                <group>
-                                    <field name="spouse_f"/>
-                                </group>
+                                <field name="spouses"/>
                             </group>
                         </group>
                         <notebook>
@@ -69,8 +63,7 @@
                                 <field name="sources"/>
                             </page>
                             <page string="Gallery">
-                                <label for="images" string="Put together a series of images to form a slideshow."/>
-                                <br/><br/><label for="images" string="Image Gallery"/>
+                                <label for="images" string="Image Gallery"/>
                                 <field name="images"/>
                             </page>
                         </notebook>

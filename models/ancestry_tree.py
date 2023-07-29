@@ -3,13 +3,19 @@ from odoo import api, fields, models
 class AncestryTree(models.Model):
     _name = 'ancestry.tree'
 
-    family_name = fields.Char(string="Family Name")
+    ancestry_base = fields.One2many(string="Base Ancestry Ref", comodel_name="ancestry.ancestry", inverse_name="family_tree")
+    family_name = fields.Char(string="Family Name", compute="_compute_family_name")
+    display_name = fields.Char(string="Display Name", compute="_compute_display_name")
     family_members = fields.One2many(string="Family Members", comodel_name="ancestry.tree.member", inverse_name="tree_id")
-    display_name = fields.Char(compute="_compute_display_name")
 
-    def _compute_display_name(self):
+    def _compute_family_name(self):
         for tree in self:
-            tree.display_name = tree.family_name + " Tree"
+            tree.family_name = tree.ancestry_base.family_name + " Tree"
+            
+    def _compute_display_name(self):
+        for record in self:
+            if record.family_name:
+                record.display_name = record.family_name
 
     def add_ancestry_tree_member(self):
         return {
@@ -41,8 +47,8 @@ class AncestryTreeMember(models.Model):
     mother = fields.Many2one(string="Mother", comodel_name="ancestry.tree.member")
     father = fields.Many2one(string="Father", comodel_name="ancestry.tree.member")
     # siblings = fields.One2many(string="Siblings", comodel_name="ancestry.tree.member")
-    spouse_m = fields.Many2many("ancestry.tree.member", "spouses", 'spouse_male', 'spouse_female', string="Spouse (M)")
-    spouse_f = fields.Many2many("ancestry.tree.member", "spouses", 'spouse_female', 'spouse_male', string="Spouse (F)")
+    spouses = fields.Many2many(string="Spouses", comodel_name="ancestry.tree.member", relation="spouses", column1='spouse_male', column2='spouse_female')
+    # spouse_f = fields.Many2many(comodel_name="ancestry.tree.member", relation="spouses", 'spouse_female', 'spouse_male', string="Spouse (F)")
     children = fields.One2many(string="Children", comodel_name="ancestry.tree.member", inverse_name="mother", compute="_update_children")
 
     #additional info
