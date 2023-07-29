@@ -6,10 +6,9 @@
             <field name="name">ancestry.ancestry_source_form</field>
             <field name="model">ancestry.source</field>
             <field name="arch" type="xml">
-                <field name="status" invisible="1"/>
                 <form>
                     <header>
-                        <button name="confirm_ancestry_event" type="object" class="btn-primary" 
+                        <button name="confirm_ancestry_source" type="object" class="btn-primary" 
                                 attrs="{'invisible':[('status', '=', 'confirmed')]}">Confirm</button>
                     </header>
                     <sheet>
@@ -21,8 +20,14 @@
                             </button>
                         </div>
                         <group>
-                            <separator string="Upload Files"/>
-                            <field name="file"/>
+                            <field name="status" invisible="1"/>
+                            <separator string="Upload File"/>
+                            <group>
+                                <field name="caption"/>
+                            </group>
+                            <group>
+                                <field name="file"/>
+                            </group>
                         </group>
                     </sheet>
                 </form>

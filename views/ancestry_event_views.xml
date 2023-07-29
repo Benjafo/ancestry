@@ -6,7 +6,6 @@
             <field name="name">ancestry.ancestry_event_form</field>
             <field name="model">ancestry.event</field>
             <field name="arch" type="xml">
-                <field name="status" invisible="1"/>
                 <form>
                     <header>
                         <button name="confirm_ancestry_event" type="object" class="btn-primary" 
@@ -21,6 +20,7 @@
                             </button>
                         </div>
                         <group>
+                            <field name="status" invisible="1"/>
                             <separator string="Add fact or event"/>
                             <field name="event_type"/>
                             <field name="event_custom_label" attrs="{'invisible':[('event_type', '!=', 'custom')]}"/>

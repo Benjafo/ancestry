@@ -17,6 +17,8 @@
         'security/ancestry_groups.xml',
         'security/ir.model.access.csv',
         'views/ancestry_event_views.xml',
+        'views/ancestry_media_views.xml',
+        'views/ancestry_source_views.xml',
         'views/ancestry_tree_member_views.xml',
         'views/ancestry_tree_views.xml',
         'views/ancestry_views.xml',

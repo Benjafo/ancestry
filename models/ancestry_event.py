@@ -2,10 +2,10 @@ from odoo import api, fields, models
 
 class AncestryEvent(models.Model):
     _name = 'ancestry.event'
-
-    # title = fields.Char(string="Event", required=True)
+    _description = 'Model to represent an event in a tree member\'s life'
 
     #event info
+    # title = fields.Char(string="Event", required=True)
     event_type = fields.Selection([
         ('birth','Birth'),
         ('death','Death'),

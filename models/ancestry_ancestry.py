@@ -2,6 +2,7 @@ from odoo import fields, models
 
 class AncestryAncestry(models.Model):
     _name = 'ancestry.ancestry'
+    _description = 'Base model for the Ancestry application'
 
     family_name = fields.Char(string="Family Name", default="New")
     family_description = fields.Text(string="Family Description")
