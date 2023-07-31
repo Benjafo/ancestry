@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<odoo>
-    <data>
-        <record id="ancestry_tree_01" model="ancestry.ancestry">
-            <field name="family_name">Peacock Family</field>
-            <field name="family_tree" ref="ancestry_tree_01"/>
-        </record>
-    </data>
-</odoo>      
