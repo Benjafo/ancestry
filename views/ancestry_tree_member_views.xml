@@ -8,10 +8,10 @@
             <field name="arch" type="xml">
                 <form>
                     <field name="status" invisible="1"/>
-                    <!-- <header>
+                    <header>
                         <button name="confirm_ancestry_tree_member" type="object" class="btn-primary" 
                                 attrs="{'invisible':[('status', '=', 'confirmed')]}">Confirm</button>
-                    </header> -->
+                    </header>
                     <sheet>
                         <div class="oe_button_box" name="button_box" attrs="{'invisible':[('status', '!=', 'confirmed')]}">
                             <button name="show_profile" type="object" class="oe_stat_button" >
@@ -40,6 +40,7 @@
                                 <field name="mother"/>
                                 <field name="father"/>
                                 <field name="children"/>
+                                <field name="siblings"/>
                                 <field name="spouses"/>
                             </group>
                         </group>
