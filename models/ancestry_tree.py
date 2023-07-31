@@ -4,7 +4,7 @@ class AncestryTree(models.Model):
     _name = 'ancestry.tree'
     _description = 'Model to represent a family tree and its members'
 
-    ancestry_base = fields.One2many(string="Base Ancestry Ref", comodel_name="ancestry.ancestry", inverse_name="family_tree")
+    ancestry_base = fields.One2many(string="Ancestry Ref", comodel_name="ancestry.ancestry", inverse_name="family_tree")
     family_name = fields.Char(string="Family Name", compute="_compute_family_name")
     display_name = fields.Char(string="Display Name", compute="_compute_display_name")
     family_members = fields.One2many(string="Family Members", comodel_name="ancestry.tree.member", inverse_name="tree_id")
@@ -34,6 +34,7 @@ class AncestryTreeMember(models.Model):
 
     #primary info
     name = fields.Char(string="Name", default="New", required=True)
+    # TODO: do we want to make the name field into one2many to hold first, middle, and last name without displaying in separate fields?
     # middle_name = fields.Char(string="Middle Name")
     # last_name = fields.Char(string="Last Name", required=True)
     # suffix = fields.Char(string="Suffix")
@@ -60,14 +61,9 @@ class AncestryTreeMember(models.Model):
     #technical
     tree_id = fields.Many2one(string="Related Tree", comodel_name="ancestry.tree")
     status = fields.Selection([("unconfirmed","Unconfirmed"),("confirmed","Confirmed")], string="Status", default="unconfirmed")
-    # is_wizard_view = fields.Boolean(string="Is Wizard View Entry")
-    # TESTMANY2MANY = fields.Many2many(string="TESTING PURPOSES ONLY", comodel_name="ancestry.tree.member", relation="test_many2many", column1="test_many2many_column1", column2 = "test_many2many_column2")
 
     #----------------------------------------------------------#
-    # TODO:
-    # 1. On change of mother or father, remove self from the previous mother or father's children
-    # 2. Add function for on change of children, to ensure correct two way functionality (do we want to implement this?)
-
+    #TODO: On change of mother or father, remove self from the previous mother or father's children
     @api.onchange("mother")
     def _onchange_mother(self):
         # remove child from previous mother's record
@@ -84,11 +80,11 @@ class AncestryTreeMember(models.Model):
         # write child to new father's record, union operator handles duplicate records
         self.father.children |= self
 
+    #TODO: Add function for on change of children, to ensure correct two way functionality (do we want to implement this?)
     @api.onchange("children")
     def _onchange_children(self):
         print('do we need to implement this functionality?')
 
-    
     def write(self, vals):
         """
         Update many2manys, serves as:
@@ -133,7 +129,6 @@ class AncestryTreeMember(models.Model):
                                 'spouses': [(3, member.id, 0)]
                             })
         return super(AncestryTreeMember, self).write(vals)
-
     #----------------------------------------------------------#
 
     def confirm_ancestry_tree_member(self):
@@ -141,20 +136,10 @@ class AncestryTreeMember(models.Model):
         # assign parent tree id
         parent_id = self.env.context.get('active_id')
         self.tree_id = self.env['ancestry.tree'].search([('id', '=', parent_id)])
-        # add record to family tree
-        # self.tree_id.family_members.write(self)
         # change member status to confirmed
         self.status = 'confirmed'
 
     def show_related_tree(self):
-        # print('uh oh')
-        # debug
-        #  c = self.env.context
-        # tree = self.env.context.get('active_id')
-        # t = 
-        # open related family tree
-        # active = self.env.context.get('active_id')
-        # self.is_wizard_view = active
         return {
             'type': 'ir.actions.act_window',
             'name': 'Add Member',
@@ -163,7 +148,6 @@ class AncestryTreeMember(models.Model):
             'view_mode': 'form',
             'target': 'current',
             'res_id': self.tree_id.id,
-            # 'domain': [('id', '=', self.tree_id)],
         }
     
     def show_profile(self):
@@ -175,5 +159,4 @@ class AncestryTreeMember(models.Model):
             'view_mode': 'form',
             'target': 'current',
             'res_id': self.id,
-            # 'domain': [('id', '=', self.tree_id)],
         }

@@ -29,7 +29,7 @@
                         <group>
                             <separator string="Technical"/>
                             <field name="client"/>
-                            <field name="family_tree"/>
+                            <field name="family_tree" readonly="1"/>
                         </group>
                     </group>
                 </form>

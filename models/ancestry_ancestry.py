@@ -7,11 +7,22 @@ class AncestryAncestry(models.Model):
     family_name = fields.Char(string="Family Name", default="New")
     family_description = fields.Text(string="Family Description")
     display_name = fields.Char(string="Display Name", compute="_compute_display_name")
-    
+    client = fields.Many2one(string="Client", comodel_name="res.partner")
+    family_tree = fields.Many2one(string="Family Tree", comodel_name="ancestry.tree")
+
     def _compute_display_name(self):
         for record in self:
             if record.family_name:
                 record.display_name = record.family_name
 
-    client = fields.Many2one(string="Client", comodel_name="res.partner")
-    family_tree = fields.Many2one(string="Family Tree", comodel_name="ancestry.tree")
+    @api.model_create_multi
+    def create(self, vals):
+        # base = self.env['ancestry.ancestry'].create(vals)
+        res = super(AncestryAncestry, self).create(vals)
+        res.family_tree = self.env['ancestry.tree'].create({'ancestry_base': res})
+        return res
+
+    def write(self, vals):
+        print('write')
+        super(AncestryAncestry, self).write(vals)
+        return True
