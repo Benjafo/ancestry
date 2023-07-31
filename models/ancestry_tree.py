@@ -11,12 +11,12 @@ class AncestryTree(models.Model):
 
     def _compute_family_name(self):
         for tree in self:
-            tree.family_name = tree.ancestry_base.family_name + " Tree"
+            tree.family_name = tree.ancestry_base.family_name
             
     def _compute_display_name(self):
         for record in self:
             if record.family_name:
-                record.display_name = record.family_name
+                record.display_name = record.family_name + " Tree"
 
     def add_ancestry_tree_member(self):
         return {
@@ -34,6 +34,7 @@ class AncestryTreeMember(models.Model):
 
     #primary info
     name = fields.Char(string="Name", default="New", required=True)
+    family_name = fields.Char(string="Family Name", compute="_compute_family_name")
     # TODO: do we want to make the name field into one2many to hold first, middle, and last name without displaying in separate fields?
     # middle_name = fields.Char(string="Middle Name")
     # last_name = fields.Char(string="Last Name", required=True)
@@ -131,13 +132,17 @@ class AncestryTreeMember(models.Model):
         return super(AncestryTreeMember, self).write(vals)
     #----------------------------------------------------------#
 
-    def confirm_ancestry_tree_member(self):
-        self.ensure_one()
-        # assign parent tree id
-        parent_id = self.env.context.get('active_id')
-        self.tree_id = self.env['ancestry.tree'].search([('id', '=', parent_id)])
-        # change member status to confirmed
-        self.status = 'confirmed'
+    def _compute_family_name(self):
+        for member in self:
+            member.family_name = member.tree_id.family_name
+    
+    @api.model_create_multi
+    def create(self, vals):
+        res = super(AncestryTreeMember, self).create(vals)
+        parent_id = res.env.context.get('active_id')
+        res.tree_id = self.env['ancestry.tree'].search([('id', '=', parent_id)])
+        res.status = 'confirmed'
+        return res
 
     def show_related_tree(self):
         return {

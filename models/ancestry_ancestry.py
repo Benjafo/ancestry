@@ -17,7 +17,6 @@ class AncestryAncestry(models.Model):
 
     @api.model_create_multi
     def create(self, vals):
-        # base = self.env['ancestry.ancestry'].create(vals)
         res = super(AncestryAncestry, self).create(vals)
         res.family_tree = self.env['ancestry.tree'].create({'ancestry_base': res})
         return res
