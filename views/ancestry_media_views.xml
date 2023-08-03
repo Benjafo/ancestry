@@ -21,8 +21,9 @@
                             <separator string="Upload Media"/>
                             <field name="media_type"/>
                             <field name="file" widget="binary" options="{'accepted_file_extensions': '.bmp,.gif,.jpeg,.jpg,.png,.tif,.tiff'}" filename="file_name" attrs="{'invisible':[('media_type', '!=', 'photo')]}"/>
+                            <field name="file" widget="binary" options="{'accepted_file_extensions': '.doc,.docx,.pdf,.rtf,.txt'}" filename="file_name" attrs="{'invisible':[('media_type', '!=', 'audio')]}"/>
                             <field name="file" widget="binary" options="{'accepted_file_extensions': '.doc,.docx,.pdf,.rtf,.txt'}" filename="file_name" attrs="{'invisible':[('media_type', '!=', 'story')]}"/>
-                            <field name="file" widget="binary" options="{'accepted_file_extensions': '.mp3,.mp4,.m4a'}" filename="file_name" attrs="{'invisible':[('media_type', '!=', 'audio')]}"/>
+                            <field name="file" widget="binary" options="{'accepted_file_extensions': '.mp4,.mov'}" filename="file_name" attrs="{'invisible':[('media_type', '!=', 'video')]}"/>
                             <field name="title" attrs="{'invisible':[('file', '=', False)]}"/>
                             <field name="media_date" attrs="{'invisible':[('file', '=', False)]}"/>
                             <field name="media_location" attrs="{'invisible':[('file', '=', False)]}"/>

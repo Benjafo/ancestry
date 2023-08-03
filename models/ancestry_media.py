@@ -9,7 +9,8 @@ class AncestryMedia(models.Model):
     media_type = fields.Selection([
         ('photo','Photo'),
         ('story','Story'),
-        ('audio','Audio')],
+        ('audio','Audio'),
+        ('video','Video')],
         string='Media Type',
         required=True)
     file = fields.Binary(string="File", attachment=True, required=True)

@@ -1,18 +1,11 @@
 {
     'name': 'Ancestry',
-
     'version': '1.0',
-
     'summary': 'Manage family trees',
-
     'description': 'A custom app with content',
-
     'author': 'Ben Foley',
-
     'category': 'Ancestry',
-
-    'depends': [ 'web' ],
-
+    'depends': [ 'portal', 'website', 'website_sale' ],
     'data': [
         'security/ancestry_groups.xml',
         'security/ir.model.access.csv',
@@ -24,16 +17,12 @@
         'views/ancestry_tree_views.xml',
         'views/ancestry_views.xml',
     ],
-    
-    # 'demo': [
-    #     'demo/ancestry_ancestry_demo.xml',
-    #     'demo/ancestry_tree_demo.xml',
-    #     'demo/ancestry_tree_member_demo.xml',
-    # ],
-
+    'demo': [
+        'demo/ancestry_ancestry_demo.xml',
+        'demo/ancestry_tree_demo.xml',
+        'demo/ancestry_tree_member_demo.xml',
+    ],
     'license': 'LGPL-3',
-
     'installable': True,
-
     'application': True,
 }

@@ -21,15 +21,32 @@
             <field name="arch" type="xml">
                 <form>
                     <h1><field name="family_name"/></h1>
+                    <field name="status" invisible="1"/>
                     <group>
                         <group>
                             <separator string="Family Information"/>
                             <field name="family_description"/>
-                        </group>
-                        <group>
-                            <separator string="Technical"/>
                             <field name="client"/>
                             <field name="family_tree" readonly="1"/>
+                        </group>
+                        <group attrs="{'invisible':[('status', '=', 'unconfirmed')]}">
+                            <separator string="Tree Information"/>
+                            <group>
+                                <group>
+                                    <field name="count_people"/>
+                                    <field name="count_records"/>
+                                    <field name="count_events"/>
+                                    <field name="count_photos"/>
+                                </group>
+                                <group>
+                                    <field name="count_stories"/>
+                                    <field name="count_audio"/>
+                                    <field name="count_videos"/>
+                                    <field name="count_sources"/>
+                                </group>
+                            </group>
+                            <separator string="Invited Clients"/>
+                            <field name="invited_clients"/>
                         </group>
                     </group>
                 </form>

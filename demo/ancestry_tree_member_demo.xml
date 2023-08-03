@@ -3,9 +3,11 @@
     <data>
         <record id="ancestry_tree_member_01" model="ancestry.tree.member">
             <field name="name">Tommy Peacock</field>
+            <field name="tree_id">ancestry_tree_01</field>
         </record>
         <record id="ancestry_tree_member_02" model="ancestry.tree.member">
             <field name="name">Connie Peacock</field>
+            <field name="tree_id">ancestry_tree_01</field>
         </record>
     </data>
 </odoo>      
