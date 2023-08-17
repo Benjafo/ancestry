@@ -22,6 +22,16 @@
         'demo/ancestry_tree_demo.xml',
         'demo/ancestry_tree_member_demo.xml',
     ],
+    'assets': {
+        'web.assets_backend': [
+            'web/static/src/xml/ancestry_templates.xml',
+        ],
+        'web.assets_common': [
+            'web/static/src/js/ancestry_models.js',
+            'web/static/src/js/ancestry_renderers.js',
+            'web/static/src/js/ancestry_views.js',
+        ],
+    },
     'license': 'LGPL-3',
     'installable': True,
     'application': True,
