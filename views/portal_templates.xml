@@ -64,12 +64,15 @@
                         Ancestry Records
                     </h1>
                     <div class='ancestry_tree'>
-                        <span>dynamically loaded data from app goes here...</span>
-                        <br/>
-                        <span><t t-out="ancestry_base"/></span>
-                        <span><t t-out="family_name"/></span>
-                        <span><t t-out="display_name"/></span>
-                        <span><t t-out="family_members"/></span>
+                        <span>dynamically loaded data from app goes here...</span> <br/><br/>
+                        <span><t t-out="ancestry.ancestry_base.family_name"/></span> <br/>
+                        <span><t t-out="ancestry.ancestry_base.display_name"/></span> <br/>
+                        <span><t t-out="ancestry.ancestry_base.client.display_name"/></span> <br/>
+                        <span><t t-out="ancestry.family_name"/></span> <br/>
+                        <span><t t-out="ancestry.display_name"/></span> <br/>
+                        <t t-foreach="ancestry.family_members" t-as="member">
+                            <span>x. <t t-out="member"/></span> <br/>
+                        </t>
                     </div>
                 </div>
             </div>
