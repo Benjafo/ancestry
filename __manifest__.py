@@ -13,25 +13,20 @@
         'views/ancestry_media_views.xml',
         'views/ancestry_source_views.xml',
         'views/ancestry_tree_member_views.xml',
-        'views/ancestry_source_views.xml',
         'views/ancestry_tree_views.xml',
         'views/ancestry_views.xml',
+        'views/portal_templates.xml',
     ],
-    'demo': [
-        'demo/ancestry_ancestry_demo.xml',
-        'demo/ancestry_tree_demo.xml',
-        'demo/ancestry_tree_member_demo.xml',
-    ],
-    'assets': {
-        'web.assets_backend': [
-            'web/static/src/xml/ancestry_templates.xml',
-        ],
-        'web.assets_common': [
-            'web/static/src/js/ancestry_models.js',
-            'web/static/src/js/ancestry_renderers.js',
-            'web/static/src/js/ancestry_views.js',
-        ],
-    },
+    # 'demo': [
+    #     'demo/ancestry_ancestry_demo.xml',
+    #     'demo/ancestry_tree_demo.xml',
+    #     'demo/ancestry_tree_member_demo.xml',
+    # ],
+    # 'assets': {
+    #     'web.assets_frontend': [],
+    #     'web.assets_backend': [],
+    #     'web.assets_common': [],
+    # },
     'license': 'LGPL-3',
     'installable': True,
     'application': True,

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="portal_docs_entry" inherit_id="portal.portal_docs_entry" name="Portal Docs Entry NO D-NONE CLASS">
+        <xpath expr="//a[@t-att-title='title']" position="attributes">
+            <attribute name="class">list-group-item list-group-item-action d-flex align-items-center justify-content-between</attribute>
+        </xpath>
+    </template>
+
+    <template id="portal_my_home_ancestry" name="Ancestry Records" inherit_id="portal.portal_my_home">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="title">Ancestry Records</t>
+                <t t-set="url" t-value="'/my/ancestry'"/>
+                <t t-set="placeholder_count" t-value="123"/>
+            </t>
+        </xpath>
+    </template>
+
+    <template id="portal_my_ancestry" name="My Ancestry">
+        <t t-call="portal.portal_layout">
+            <t t-if="not ancestry">
+                <div class="alert alert-warning mt8" role="alert">
+                    <p class="mb-0">There are no ancestry records linked to your account.</p>
+                </div>
+            </t>
+            <t t-else="" t-call="portal.portal_table">
+                <t t-set="ancestry" t-value="grouped_ancestry or ancestry"/>
+                <thead>
+                    <tr>
+                        <th>Tree</th>
+                        <th>Reference</th>
+                        <th class="text-end">Date</th>
+                    </tr>
+                </thead>
+                <t t-foreach="ancestry" t-as="ancs">
+                    <tbody>
+                        <t t-foreach="ancs" t-as="ancestry">
+                            <tr>
+                                <td>
+                                    <a t-attf-href="/my/tree">
+                                        <t t-out="ancestry.display_name"/>
+                                    </a>
+                                </td>
+                                <td>
+                                    <t t-out="ancestry.client.display_name"/>
+                                </td>
+                                <td class="text-end">
+                                    <t t-out="ancestry.record_date"/>
+                                </td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <template id="portal_ancestry_record" name="Ancestry Record">
+        <t t-set="no_breadcrumbs" t-value="True"/>
+        <t t-call="portal.portal_layout">
+            <div id="wrap" class="d-flex bg-o-color-4 px-3 mt-3">
+                <div class="container mb64">
+                    <h1 class="o_page_header mt32">
+                        Ancestry Records
+                    </h1>
+                    <div class='ancestry_tree'>
+                        <span>dynamically loaded data from app goes here...</span>
+                        <br/>
+                        <span><t t-out="ancestry_base"/></span>
+                        <span><t t-out="family_name"/></span>
+                        <span><t t-out="display_name"/></span>
+                        <span><t t-out="family_members"/></span>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>
