@@ -1,8 +1,13 @@
-from odoo import api, fields, models, route
-from odoo.addons.portal.controllers import portal
+from odoo import api, fields, models
+from odoo.addons.portal.controllers.portal import CustomerPortal
+from odoo.http import request, route
 
-class AncestryPortal(portal.CustomerPortal):
+class AncestryPortal(CustomerPortal):
 
-    @route(['/my', '/my/home'], type='http', auth="user", website=True)
-    def home(self, **kw):
-        res = super().home()
+    @route('/my/ancestry', type='http', auth="user", website=True)
+    def ancestry(self, **kwargs):
+        values = self._prepare_portal_layout_values()
+        values.update({
+            'ancestry': request.env['ancestry.ancestry'].sudo().search([('client.id', '=', request.env.user.commercial_partner_id.id)]),
+        })
+        return request.render("ancestry.portal_my_ancestry", values)

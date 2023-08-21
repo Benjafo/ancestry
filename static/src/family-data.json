@@ -1,0 +1,62 @@
+{
+    "name": "John Doe",
+    "children": [
+        {
+            "name": "Jane Doe",
+            "children": [
+                { "name": "Alice Doe" },
+                { "name": "Bob Doe" },
+                { "name": "Eve Doe" }
+            ]
+        },
+        {
+            "name": "Jim Doe",
+            "children": [
+                { "name": "Charlie Doe" },
+                { "name": "David Doe" }
+            ]
+        },
+        {
+            "name": "Mary Smith",
+            "children": [
+                {
+                    "name": "Susan Johnson",
+                    "children": [
+                        {
+                            "name": "John Doe2",
+                            "children": [
+                                {
+                                    "name": "Jane Doe2",
+                                    "children": [
+                                        { "name": "Alice Doe2" },
+                                        { "name": "Bob Doe2" },
+                                        { "name": "Eve Doe2" }
+                                    ]
+                                },
+                                {
+                                    "name": "Jim Doe2",
+                                    "children": [
+                                        { "name": "Charlie Doe2" },
+                                        { "name": "David Doe2" }
+                                    ]
+                                },
+                                {
+                                    "name": "Mary Smith2",
+                                    "children": [
+                                        {
+                                            "name": "Susan Johnson2",
+                                            "children": [
+                                                { "name": "Sophia Johnson" },
+                                                { "name": "Emily Johnson" }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -26,6 +26,7 @@
                         <group>
                             <separator string="Family Information"/>
                             <field name="family_description"/>
+                            <field name="record_date"/>
                             <field name="client"/>
                             <field name="family_tree" readonly="1"/>
                         </group>
