@@ -1,8 +1,8 @@
 {
     'name': 'Ancestry',
-    'version': '1.0',
+    'version': '1.1',
     'summary': 'Manage family trees',
-    'description': 'A custom app with content',
+    'description': 'The best app ever :)',
     'author': 'Ben Foley',
     'category': 'Ancestry',
     'depends': [ 'portal', 'website', 'website_sale' ],
@@ -18,9 +18,9 @@
         'views/portal_templates.xml',
     ],
     # 'demo': [
-    #     'demo/ancestry_ancestry_demo.xml',
-    #     'demo/ancestry_tree_demo.xml',
-    #     'demo/ancestry_tree_member_demo.xml',
+        # 'demo/ancestry_ancestry_demo.xml',
+        # 'demo/ancestry_tree_member_demo.xml',
+        # 'demo/ancestry_tree_demo.xml',
     # ],
     # 'assets': {
     #     'web.assets_frontend': [],

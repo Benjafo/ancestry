@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data>
-        <record id="ancestry_tree_01" model="ancestry.tree">
-            <field name="family_name">Peacock Family</field>
-            <field name="family_members" ref="['ancestry_tree_member_01', 'ancestry_tree_member_02']"/>
-        </record>
-    </data>
-</odoo>      
+    <record id="ancestry_tree_record_01" model="ancestry.tree">
+        <field name="family_name">Peacock Family Tree</field>
+        <field name="ancestry_base" ref="ancestry.ancestry_record_01"/>
+        <field name="family_members" eval="[(4, ref('ancestry_tree_member_record_01')),(4, ref('ancestry_tree_member_record_02')),(4, ref('ancestry_tree_member_record_03')),(4, ref('ancestry_tree_member_record_04')),(4, ref('ancestry_tree_member_record_05'))]"/>
+    </record>
+</odoo>

@@ -7,6 +7,6 @@ class AncestryFamilyTree(CustomerPortal):
     def tree(self, **kwargs):
         values = self._prepare_portal_layout_values()
         values.update({
-            'ancestry': request.env['ancestry.tree'].sudo().search([('ancestry_base.id', '=', request.env.user.commercial_partner_id.id)]),
+            'tree': request.env['ancestry.tree'].sudo().search([('id', '=', kwargs['id'])]),
         })
         return request.render("ancestry.portal_ancestry_record", values)
