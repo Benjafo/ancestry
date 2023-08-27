@@ -8,6 +8,7 @@ class AncestryTree(models.Model):
     family_name = fields.Char(string="Family Name", compute="_compute_family_name")
     display_name = fields.Char(string="Display Name", compute="_compute_display_name")
     family_members = fields.One2many(string="Family Members", comodel_name="ancestry.tree.member", inverse_name="tree_id")
+    root_member = fields.Many2one(string="Root Family Member", comodel_name="ancestry.tree.member")
 
     def _check_portal(self):
         # Add access rules for the portal users

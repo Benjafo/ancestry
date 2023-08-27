@@ -12,7 +12,8 @@
                             context="{'tree_id':id}">Add Member</button>
                     <group>
                         <separator string="Family Members"/>
-                        <field name="family_members" readonly="1"/>
+                        <field name="root_member"/>
+                        <field name="family_members"/>
                     </group>
                 </form>
             </field>

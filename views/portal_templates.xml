@@ -11,19 +11,14 @@
             <t t-call="portal.portal_docs_entry">
                 <t t-set="title">Ancestry Records</t>
                 <t t-set="url" t-value="'/my/ancestry'"/>
-                <t t-set="placeholder_count" t-value="123"/>
+                <t t-set="placeholder_count" t-value="'ancestry_count'"/>
             </t>
         </xpath>
     </template>
 
     <template id="portal_my_ancestry" name="My Ancestry">
         <t t-call="portal.portal_layout">
-            <t t-if="not ancestry">
-                <div class="alert alert-warning mt8" role="alert">
-                    <p class="mb-0">There are no ancestry records linked to your account.</p>
-                </div>
-            </t>
-            <t t-else="" t-call="portal.portal_table">
+            <t t-call="portal.portal_table">
                 <t t-set="ancestry" t-value="grouped_ancestry or ancestry"/>
                 <thead>
                     <tr>
@@ -58,24 +53,23 @@
     <template id="portal_ancestry_record" name="Ancestry Record">
         <t t-set="no_breadcrumbs" t-value="True"/>
         <t t-call="portal.portal_layout">
-        <div id="wrap" class="d-flex bg-o-color-4 px-3 mt-3">
-            <div class="container mb64">
-                <h1 class="o_page_header mt32">
-                    Ancestry Records
-                </h1>
-                <div class='ancestry_tree'>
-                    <span>dynamically loaded data from app goes here...</span>
-                    <br/> <span>example:</span> <br/><br/>
-                    <span><t t-esc="tree.family_name"/></span> <br/>
-                    <span><t t-esc="tree.display_name"/></span> <br/>
-                    <span><t t-esc="tree.ancestry_base.client.display_name"/></span> <br/>
-                    <span><t t-esc="tree.display_name"/></span> <br/>
-                    <t t-foreach="tree.family_members" t-as="member">
-                        <span>x. <t t-out="member.name"/></span> <br/>
-                    </t>
+            <div id="wrap" class="d-flex bg-o-color-4 px-3 mt-3">
+                <div class="container mb64">
+                    <h3 class="o_page_header" style="padding-top:10px">Family Tree</h3>
+                    <span class="d-none" id="loaded_data"><t t-esc="tree_data"/></span>
+                    <div id="tree_container"></div>
+                    <script src="https://d3js.org/d3.v6.min.js"></script>
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
+                    <script src="https://cdn.jsdelivr.net/npm/d3-dtree@2.4.1/dist/dTree.min.js"></script>
+                    <link rel="stylesheet" href="/ancestry/static/src/css/layout.css"/>
+                    <link rel="stylesheet" href="/ancestry/static/src/css/movement.css"/>
+                    <link rel="stylesheet" href="/ancestry/static/src/css/tree_styles.css"/>
+                    <script type="text/javascript" src="/ancestry/static/src/js/tree.js"></script>
+                    <script type="text/javascript" src="/ancestry/static/src/js/movement/hover.js"></script>
+                    <!-- <script type="text/javascript" src="/ancestry/static/src/js/movement/zoom.js"></script> -->
+                    <script type="text/javascript" src="/ancestry/static/src/js/movement/drag.js"></script>
                 </div>
             </div>
-        </div>
         </t>
     </template>
 </odoo>

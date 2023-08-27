@@ -1,11 +1,11 @@
 {
     'name': 'Ancestry',
     'version': '1.1',
-    'summary': 'Manage family trees',
+    'summary': 'Store and organize client data for ancestry research',
     'description': 'The best app ever :)',
     'author': 'Ben Foley',
     'category': 'Ancestry',
-    'depends': [ 'portal', 'website', 'website_sale' ],
+    'depends': ['website', 'website_sale'],
     'data': [
         'security/ancestry_groups.xml',
         'security/ir.model.access.csv',
@@ -18,15 +18,15 @@
         'views/portal_templates.xml',
     ],
     # 'demo': [
-        # 'demo/ancestry_ancestry_demo.xml',
-        # 'demo/ancestry_tree_member_demo.xml',
-        # 'demo/ancestry_tree_demo.xml',
+    #     'demo/ancestry_ancestry_demo.xml',
+    #     'demo/ancestry_tree_member_demo.xml',
+    #     'demo/ancestry_tree_demo.xml',
     # ],
-    # 'assets': {
-    #     'web.assets_frontend': [],
-    #     'web.assets_backend': [],
-    #     'web.assets_common': [],
-    # },
+    'assets': {
+        'web.assets_frontend': ['ancestry/static/src/js/util/hide.js'],
+        # 'web.assets_backend': [],
+        # 'web.assets_common': [],
+    },
     'license': 'LGPL-3',
     'installable': True,
     'application': True,
