@@ -1,9 +1,0 @@
-
-/* Add the 'hover-pointer' class to change cursor on hover */
-#tree_container.hover-pointer {
-    cursor: move;
-}
-
-.node:hover {
-    cursor: pointer;
-}
