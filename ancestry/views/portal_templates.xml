@@ -55,19 +55,21 @@
         <t t-call="portal.portal_layout">
             <div id="wrap" class="d-flex bg-o-color-4 px-3 mt-3">
                 <div class="container mb64">
-                    <h3 class="o_page_header" style="padding-top:10px">Family Tree</h3>
+                    <h3 class="o_page_header" style="padding-top:20px">Family Tree</h3>
                     <span class="d-none" id="loaded_data"><t t-esc="tree_data"/></span>
                     <div id="tree_container"></div>
                     <script src="https://d3js.org/d3.v6.min.js"></script>
                     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
                     <script src="https://cdn.jsdelivr.net/npm/d3-dtree@2.4.1/dist/dTree.min.js"></script>
+                    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
                     <link rel="stylesheet" href="/ancestry/static/src/css/layout.css"/>
                     <link rel="stylesheet" href="/ancestry/static/src/css/movement.css"/>
                     <link rel="stylesheet" href="/ancestry/static/src/css/tree_styles.css"/>
-                    <script type="text/javascript" src="/ancestry/static/src/js/tree.js"></script>
+                    <script type="module" src="/ancestry/static/src/js/tree.js"></script>
+                    <script type="text/javascript" src="/ancestry/static/src/js/util/hide.js"></script>
                     <script type="text/javascript" src="/ancestry/static/src/js/movement/hover.js"></script>
                     <!-- <script type="text/javascript" src="/ancestry/static/src/js/movement/zoom.js"></script> -->
-                    <script type="text/javascript" src="/ancestry/static/src/js/movement/drag.js"></script>
+                    <!-- <script type="text/javascript" src="/ancestry/static/src/js/movement/drag.js"></script> -->
                 </div>
             </div>
         </t>

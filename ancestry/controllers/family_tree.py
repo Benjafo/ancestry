@@ -37,6 +37,12 @@ class AncestryFamilyTree(CustomerPortal):
             # "spouses": [self._get_family_member(spouse) for spouse in root.spouses],
         }
     
+    def _get_root_member(self, tree):
+        for member in tree.family_members:
+            print('-------------------')
+            if not member.father and not member.mother:
+                return member
+    
     def _get_tree_data(self, tree):
         base = tree.ancestry_base
         return {
@@ -53,5 +59,5 @@ class AncestryFamilyTree(CustomerPortal):
             "count_stories": base.count_stories,
             "count_videos": base.count_videos,
             "invited_clients": base.invited_clients.ids,
-            "members": self._get_family_member(tree.root_member),
+            "members": self._get_family_member(self._get_root_member((tree))),
         }
