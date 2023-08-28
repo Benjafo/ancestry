@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="ancestry_tree_member_record_01" model="ancestry.tree.member">
+        <field name="name">Tommy Peacock</field>
+        <!-- <field name="tree_id" ref="ancestry.ancestry_tree_record_01"/> -->
+    </record>
+    <record id="ancestry_tree_member_record_02" model="ancestry.tree.member">
+        <field name="name">Connie Peacock</field>
+        <!-- <field name="tree_id" ref="ancestry.ancestry_tree_record_01"/> -->
+    </record>
+    <record id="ancestry_tree_member_record_03" model="ancestry.tree.member">
+        <field name="name">Kristen Thomas</field>
+        <!-- <field name="tree_id" ref="ancestry.ancestry_tree_record_01"/> -->
+    </record>
+    <record id="ancestry_tree_member_record_04" model="ancestry.tree.member">
+        <field name="name">Jen Thomas</field>
+        <!-- <field name="tree_id" ref="ancestry.ancestry_tree_record_01"/> -->
+    </record>
+    <record id="ancestry_tree_member_record_05" model="ancestry.tree.member">
+        <field name="name">Ken Thomas</field>
+        <!-- <field name="tree_id" ref="ancestry.ancestry_tree_record_01"/> -->
+    </record>
+</odoo>      

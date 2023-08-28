@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="ancestry_record_01" model="ancestry.ancestry">
+        <field name="family_name">Peacock Family</field>
+        <field name="record_date">2023-08-08</field>
+        <field name="family_tree" eval="[
+            Command.create({
+                'family_name': 'Peacock Family',
+            }),
+            Command.link(ref('ancestry.view_ancestry_ancestry_form'))
+        ]"/>
+    </record>
+</odoo>      
+
+<!-- 'family_members': [
+                    Command.create({
+                        'name': 'Connie Peacock',
+                    }),
+                    Command.create({
+                        'name': 'Tom Peacock',
+                    }),
+                ] -->
