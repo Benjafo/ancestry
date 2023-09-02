@@ -26,12 +26,14 @@
                             <field name="status" invisible="1"/>
                             <separator string="Primary Info"/>
                             <group>
+                                <field name="suffix"/>
+                                <field name="gender"/>
                                 <field name="description"/>
                             </group>
                             <group>
                                 <field name="date_birth"/>
-                                <field name="date_death"/>
-                                <field name="is_living"/>
+                                <field name="date_death" attrs="{'readonly': [('is_deceased', '=', False)]}"/>
+                                <field name="is_deceased"/>
                             </group>
                         </group>
                         <separator string="Family Relations"/>
@@ -41,15 +43,15 @@
                                 <field name="father"/>
                             </group>
                             <group>
-                                <field name="children"/>
+                                <field name="children" readonly="1"/>
                             </group>
                         </group>
                         <group>
                             <group>
-                                <field name="siblings"/>
+                                <field name="spouses"/>
                             </group>
                             <group>
-                                <field name="spouses"/>
+                                <field name="siblings" readonly="1"/>
                             </group>
                         </group>
                         <notebook>

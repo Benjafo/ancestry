@@ -15,6 +15,11 @@ class AncestryFamilyTree(CustomerPortal):
         return request.render("ancestry.portal_ancestry_record", values)
 
     def _get_family_member(self, root):
+        children = []
+        if root.mother:
+            children.append(self._get_family_member(root.mother))
+        if root.father:
+            children.append(self._get_family_member(root.father))
         return {
             "id": root.id,
             "tree_id": root.tree_id.id,
@@ -22,7 +27,7 @@ class AncestryFamilyTree(CustomerPortal):
             "status": root.status,
             "date_birth": root.date_birth,
             "date_death": root.date_death,
-            "is_living": root.is_living,
+            "is_deceased": root.is_deceased,
             "location_birth": root.location_birth,
             "location_death": root.location_death,
             "description": root.description,
@@ -30,18 +35,12 @@ class AncestryFamilyTree(CustomerPortal):
             "events": root.events.ids,
             "images": root.images.ids,
             "sources": root.sources.ids,
-            "children": [self._get_family_member(child) for child in root.children],
+            "children": children,
             # "mother": self._get_family_member(root.mother),
             # "father": self._get_family_member(root.father),
             # "siblings": [self._get_family_member(sibling) for sibling in root.siblings],
             # "spouses": [self._get_family_member(spouse) for spouse in root.spouses],
         }
-    
-    def _get_root_member(self, tree):
-        for member in tree.family_members:
-            print('-------------------')
-            if not member.father and not member.mother:
-                return member
     
     def _get_tree_data(self, tree):
         base = tree.ancestry_base
@@ -59,5 +58,5 @@ class AncestryFamilyTree(CustomerPortal):
             "count_stories": base.count_stories,
             "count_videos": base.count_videos,
             "invited_clients": base.invited_clients.ids,
-            "members": self._get_family_member(self._get_root_member((tree))),
+            "members": self._get_family_member(tree.root_member),
         }

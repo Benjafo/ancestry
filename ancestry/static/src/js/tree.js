@@ -1,123 +1,9 @@
 // In this representation, 'children' does not refer to a human parent-child relationship, 
 // but rather the position of the tree entry relative to the others
-
-// The actual data to use
 const treeData = JSON.parse(document.getElementById('loaded_data').innerHTML.replaceAll("\'", "\"").replaceAll("False", "\"\""));
 
-// Test data
-const data_childAsRoot = {
-  "name": "Grandchild 1",
-  "gender": "",
-  "children": [
-    {
-      "name": "Parent 1",
-      "gender": "male",
-      "children": [
-        {
-          "name": "Grandparent 1",
-          "gender": "male",
-          "children": [],
-        },
-        {
-          "name": "Grandparent 2",
-          "gender": "female",
-          "children": [],
-        },
-      ],
-    },
-    {
-      "name": "Parent 2",
-      "gender": "female",
-      "children": [
-        {
-          "name": "Grandparent 3",
-          "gender": "male",
-          "children": [],
-        },
-        {
-          "name": "Grandparent 4",
-          "gender": "female",
-          "children": [
-            {
-              "name": "Great Grandparent",
-              "gender": "male",
-              "children": [
-                {
-                  "name": "Great Great Grandparent",
-                  "gender": "female",
-                  "children": [
-                    {
-                      "name": "Great Great Great Grandparent",
-                      "gender": "",
-                      "children": [],
-                    }
-                  ],
-                }
-              ],
-            }
-          ],
-        },
-      ],
-    },
-  ],
-};
-const data_parentAsRoot = {
-  'name': 'God',
-  'gender': '',
-  'children': [
-    {'name': 'Chaos', 'gender': 'male', 'children': [
-        {'name': 'Gaea', 'gender': 'female', 'children': [
-            {'name': 'Uranus', 'gender': 'male', 'children': [
-                {'name': 'Oceanus', 'gender': 'male', 'children': []},
-                {'name': 'Thethys', 'gender': 'female', 'children': []}
-            ]}
-        ]}
-    ]},
-    {'name': 'Rhea', 'gender': 'female', 'children': [
-        {'name': 'Cronus', 'gender': 'male', 'children': [
-            {'name': 'Demeter', 'gender': 'female', 'children': []},
-            {'name': 'Hades', 'gender': 'male', 'children': []},
-            {'name': 'Hera', 'gender': 'female', 'children': [
-                {'name': 'Hephaestus', 'gender': 'male', 'children': []},
-                {'name': 'Hebe', 'gender': 'female', 'children': []}
-            ]},
-            {'name': 'Zeus', 'gender': 'male', 'children': [
-                {'name': 'Athena', 'gender': 'female', 'children': []},
-                {'name': 'Apollo', 'gender': 'male', 'children': []},
-                {'name': 'Artemis', 'gender': 'female', 'children': []}
-            ]}
-        ]}
-    ]},
-    {'name': 'Doris', 'gender': 'female', 'children': [
-        {'name': 'Neures', 'gender': 'male', 'children': []}
-    ]},
-    {'name': 'Poseidon', 'gender': 'male', 'children': [
-        {'name': 'Triton', 'gender': 'male', 'children': []},
-        {'name': 'Pegasus', 'gender': 'male', 'children': []},
-        {'name': 'Orion', 'gender': 'male', 'children': []},
-        {'name': 'Polyphemus', 'gender': 'male', 'children': []}
-    ]},
-    {'name': 'Achilles', 'gender': 'male', 'children': [
-        {'name': 'Neoptolemus', 'gender': 'male', 'children': []}
-    ]},
-    {'name': 'Aeneas', 'gender': 'male', 'children': [
-        {'name': 'Aeneas Jr.', 'gender': 'male', 'children': [
-            {'name': 'Pompilius', 'gender': 'male', 'children': []}
-        ]},
-        {'name': 'Lavinia', 'gender': 'female', 'children': [
-            {'name': 'Iulus', 'gender': 'male', 'children': []}
-        ]}
-    ]},
-    {'name': 'Helen', 'gender': 'female', 'children': [
-        {'name': 'Hermione', 'gender': 'female', 'children': []}
-    ]}
-  ]
-};
-
-console.log(treeData)
-
 // Create the representation
-const root = d3.hierarchy(treeData);
+const root = d3.hierarchy(treeData.members);
 
 // Compute the tree height; this approach will allow the height of the
 // SVG to scale according to the breadth (width) of the tree layout.
@@ -173,11 +59,6 @@ const node = svg.append("g")
     .attr("class", "node") //add node class to text
     .attr("transform", d => `translate(${d.y},${d.x})`);
 
-// A circle icon to represent each entry in the tree
-// node.append("circle")
-//     .attr("fill", d => d.children ? "black" : "lightgray") // fill color #999 if the entry has children, and #555 if it does not
-//     .attr("r", 3); // radius of the circle
-
 // Profile picture for each entry
 const path = "/ancestry/static/src/img/profile/"
 node.append("image")
@@ -202,12 +83,11 @@ node.append("text")
 document.addEventListener("DOMContentLoaded", () => {
   const nodes = document.getElementsByClassName("node");
   for (let i = 0; i < nodes.length; i++) {
-    nodes[i].addEventListener("click", (event) => {
-      alert(event.target.__data__.data.name)
-    })
+    nodes[i].addEventListener("click", (event) => openPopup(event))
   }
 });
 
+// Add to dom
 const tree_container = d3.select(document.getElementById('tree_container')).node()
 tree_container.appendChild(svg.node());
 

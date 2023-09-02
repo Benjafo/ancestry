@@ -1,4 +1,3 @@
-from odoo import api, fields, models
 from odoo.addons.portal.controllers.portal import CustomerPortal
 from odoo.http import request, route
 

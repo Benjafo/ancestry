@@ -13,6 +13,7 @@
                 <t t-set="url" t-value="'/my/ancestry'"/>
                 <t t-set="placeholder_count" t-value="'ancestry_count'"/>
             </t>
+            <script type="text/javascript" src="/ancestry/static/src/js/util/hide.js"></script>
         </xpath>
     </template>
 
@@ -62,11 +63,11 @@
                     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
                     <script src="https://cdn.jsdelivr.net/npm/d3-dtree@2.4.1/dist/dTree.min.js"></script>
                     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-                    <link rel="stylesheet" href="/ancestry/static/src/css/layout.css"/>
                     <link rel="stylesheet" href="/ancestry/static/src/css/movement.css"/>
+                    <link rel="stylesheet" href="/ancestry/static/src/css/popup.css"/>
                     <link rel="stylesheet" href="/ancestry/static/src/css/tree_styles.css"/>
-                    <script type="module" src="/ancestry/static/src/js/tree.js"></script>
-                    <script type="text/javascript" src="/ancestry/static/src/js/util/hide.js"></script>
+                    <script type="text/javascript" src="/ancestry/static/src/js/tree.js"></script>
+                    <script type="text/javascript" src="/ancestry/static/src/js/popup.js"></script>
                     <script type="text/javascript" src="/ancestry/static/src/js/movement/hover.js"></script>
                     <!-- <script type="text/javascript" src="/ancestry/static/src/js/movement/zoom.js"></script> -->
                     <!-- <script type="text/javascript" src="/ancestry/static/src/js/movement/drag.js"></script> -->

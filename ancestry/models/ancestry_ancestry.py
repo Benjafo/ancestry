@@ -8,7 +8,7 @@ class AncestryAncestry(models.Model):
     family_name = fields.Char(string="Family Name", default="New", required=True)
     family_description = fields.Text(string="Family Description")
     display_name = fields.Char(string="Display Name", compute="_compute_display_name")
-    client = fields.Many2one(string="Client", comodel_name="res.partner")
+    client = fields.Many2one(string="Client", comodel_name="res.partner", required=True)
     family_tree = fields.Many2one(string="Family Tree", comodel_name="ancestry.tree")
     record_date = fields.Date(string="Date", required=True)
 
@@ -75,7 +75,16 @@ class AncestryAncestry(models.Model):
 
     @api.model_create_multi
     def create(self, vals):
+        # Make new tree
         res = super(AncestryAncestry, self).create(vals)
         res.family_tree = self.env['ancestry.tree'].create({'ancestry_base': res})
         res.status = 'confirmed'
+        # Add client to tree as member
+        root = self.env['ancestry.tree.member'].create({
+            'name': res.client.display_name,
+            'family_name': res.family_name,
+            'tree_id': res.family_tree.id,
+        })
+        res.family_tree.family_members = [(4, root.id)]
+        res.family_tree.root_member = root
         return res

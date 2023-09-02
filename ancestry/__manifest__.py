@@ -5,7 +5,7 @@
     'description': 'The best app ever :)',
     'author': 'Ben Foley',
     'category': 'Ancestry',
-    'depends': ['website', 'website_sale'],
+    'depends': ['website_sale'],
     'data': [
         'security/ancestry_groups.xml',
         'security/ir.model.access.csv',
@@ -24,8 +24,6 @@
     # ],
     'assets': {
         'web.assets_frontend': ['ancestry/static/src/js/util/hide.js'],
-        # 'web.assets_backend': [],
-        # 'web.assets_common': [],
     },
     'license': 'LGPL-3',
     'installable': True,

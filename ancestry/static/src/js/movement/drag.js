@@ -1,5 +1,6 @@
-const container = svg.node().querySelector("g");
+const container = svg.node().querySelector("g .node");
 const transform = container.getAttribute("transform");
+console.log(container, transform)
 const [translate, scaleStr] = transform.split("scale(");
 const [translateX, translateY] = translate
     .replace("translate(", "")
