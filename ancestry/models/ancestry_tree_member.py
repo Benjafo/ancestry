@@ -7,9 +7,6 @@ class AncestryTreeMember(models.Model):
     #primary info
     name = fields.Char(string='Name', default='New', required=True)
     family_name = fields.Char(string='Family Name', compute='_compute_family_name')
-    # TODO: do we want to make the name field into one2many to hold first, middle, and last name without displaying in separate fields?
-    # middle_name = fields.Char(string='Middle Name')
-    # last_name = fields.Char(string='Last Name', required=True)
     suffix = fields.Char(string='Suffix')
     gender = fields.Selection([('female','Female'),('male','Male'),('other','Other')], string='Gender', default='')
     description = fields.Text(string='Description/Summary')
@@ -58,6 +55,11 @@ class AncestryTreeMember(models.Model):
 
     #----------------------------------------------------------#
 
+    # Copy family name from tree object to all members
+    def _compute_family_name(self):
+        for member in self:
+            member.family_name = member.tree_id.family_name
+    
     # Retrieve the siblings for the current record by matching the mother's 
     # id and father's id of all records to the current record's id
     def _compute_children(self):
@@ -65,16 +67,13 @@ class AncestryTreeMember(models.Model):
             + self.env['ancestry.tree.member'].search([('father.id', '=', self.id)])
 
     # Retrieve the siblings for the current record by matching the current record's
-    # mother's id and father's id to the mother's id and father's id of all records
+    # mother's id and father's id to the mother's id and father's id of all records,
+    # ensuring that the current record isn't listed as a sibling of itself
     def _compute_siblings(self):
-        self.siblings = self.env['ancestry.tree.member'].search([('mother.id', '=', self.mother.id)]) \
-            + self.env['ancestry.tree.member'].search([('father.id', '=', self.father.id)])
-
+        self.siblings = self.env['ancestry.tree.member'].search(['&', ('mother.id', '=', self.mother.id), ('id', '!=', self.id)]) \
+            + self.env['ancestry.tree.member'].search(['&', ('father.id', '=', self.father.id), ('id', '!=', self.id)])
+    
     #----------------------------------------------------------#
-
-    def _compute_family_name(self):
-        for member in self:
-            member.family_name = member.tree_id.family_name
     
     @api.model_create_multi
     def create(self, vals):
