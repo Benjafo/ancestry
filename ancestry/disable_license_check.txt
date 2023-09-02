@@ -1,0 +1,5 @@
+Go to:
+
+enterprise/web_enterprise/static/src/webclient/home_menu/enterprise_subscription_service.js
+
+Find the block that sets the value of 'this.expirationDate'. Hard code the expiration date to something like 999 days

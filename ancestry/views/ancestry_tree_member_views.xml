@@ -48,7 +48,7 @@
                         </group>
                         <group>
                             <group>
-                                <field name="spouses"/>
+                                <field name="spouses" readonly="1"/>
                             </group>
                             <group>
                                 <field name="siblings" readonly="1"/>
@@ -74,36 +74,14 @@
                                     </tree>
                                 </field>
                             </page>
-                            <page string="Images">
-                                <label for="images">Image Gallery</label>
-                                <field name="images">
-                                    <tree>
-                                        <field name="title"/>
-                                        <field name="file_name"/>
-                                        <field name="media_date"/>
-                                        <field name="media_location"/>
-                                    </tree>
-                                </field>
-                            </page>
-                            <page string="Audio">
-                                <label for="images">Audio Records</label>
-                                <field name="images">
-                                    <tree>
-                                        <field name="title"/>
-                                        <field name="file_name"/>
-                                        <field name="media_date"/>
-                                        <field name="media_location"/>
-                                    </tree>
-                                </field>
-                            </page>
                             <page string="Documents">
-                                <label for="images">Documents</label>
-                                <field name="images">
+                                <label for="media">Documents</label>
+                                <field name="media">
                                     <tree>
                                         <field name="title"/>
-                                        <field name="file_name"/>
                                         <field name="media_date"/>
                                         <field name="media_location"/>
+                                        <field name="media_type"/>
                                     </tree>
                                 </field>
                             </page>

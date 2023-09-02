@@ -33,3 +33,12 @@ class AncestryTree(models.Model):
             'target': 'current',
         }
 
+    def create_marriage_link(self):
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Create Marriage Link',
+            'res_model': 'marriage.wizard',
+            'view_type': 'form',
+            'view_mode': 'form',
+            'target': 'new',
+        }

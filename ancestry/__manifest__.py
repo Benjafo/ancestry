@@ -16,6 +16,7 @@
         'views/ancestry_tree_views.xml',
         'views/ancestry_views.xml',
         'views/portal_templates.xml',
+        'wizard/marriage_wizard.xml',
     ],
     # 'demo': [
     #     'demo/ancestry_ancestry_demo.xml',

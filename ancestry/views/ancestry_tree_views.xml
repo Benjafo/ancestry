@@ -8,11 +8,13 @@
             <field name="arch" type="xml">
                 <form>
                     <h1><field name="family_name"/></h1>
-                    <button name="add_ancestry_tree_member" type="object" class="btn-primary"
+                    <button name="add_ancestry_tree_member" type="object" class="btn-primary mx-1"
                             context="{'tree_id':id}">Add Member</button>
+                    <button name="create_marriage_link" type="object" class="btn-primary mx-1"
+                            context="{'tree_id':id}">Create Marriage</button>
                     <group>
                         <separator string="Family Members"/>
-                        <field name="family_members"/>
+                        <field name="family_members" readonly="1"/>
                     </group>
                 </form>
             </field>

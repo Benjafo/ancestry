@@ -47,7 +47,7 @@ class AncestryTreeMember(models.Model):
     #additional info
     events = fields.One2many(string='Life Events', comodel_name='ancestry.event', inverse_name='tree_member_id')
     sources = fields.One2many(string='Sources', comodel_name='ancestry.source', inverse_name='tree_member_id')
-    images = fields.One2many(string='Image Gallery', comodel_name='ancestry.media', inverse_name='tree_member_id')
+    media = fields.One2many(string='Media Gallery', comodel_name='ancestry.media', inverse_name='tree_member_id')
 
     #technical
     tree_id = fields.Many2one(string='Related Tree', comodel_name='ancestry.tree')
@@ -72,7 +72,12 @@ class AncestryTreeMember(models.Model):
     def _compute_siblings(self):
         self.siblings = self.env['ancestry.tree.member'].search(['&', ('mother.id', '=', self.mother.id), ('id', '!=', self.id)]) \
             + self.env['ancestry.tree.member'].search(['&', ('father.id', '=', self.father.id), ('id', '!=', self.id)])
-    
+
+    # Retrieve the spouses for the current record by matching the current record's spouse's id to 
+    # the spouse's id of all records, ensuring that the current record isn't listed as a spouse of itself
+    def _compute_spouses(self):
+        self.spouses = self.env['ancestry.tree.member'].search([('spouses.id', '=', self.spouses.id)])
+
     #----------------------------------------------------------#
     
     @api.model_create_multi
