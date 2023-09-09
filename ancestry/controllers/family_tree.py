@@ -33,7 +33,7 @@ class AncestryFamilyTree(CustomerPortal):
             "description": root.description,
             "gender": root.gender,
             "events": root.events.ids,
-            "images": root.images.ids,
+            "media": root.media.ids,
             "sources": root.sources.ids,
             "children": children,
             # "mother": self._get_family_member(root.mother),
