@@ -46,25 +46,25 @@ class AncestryAncestry(models.Model):
         for record in self:
             img = 0
             for member in record.family_tree.family_members:
-                img += len(member.images.filtered(lambda i: i.media_type == 'photo'))
+                img += len(member.media.filtered(lambda i: i.media_type == 'photo'))
             record.count_photos = img
     def _compute_count_stories(self):
         for record in self:
             st = 0
             for member in record.family_tree.family_members:
-                st += len(member.images.filtered(lambda i: i.media_type == 'story'))
+                st += len(member.media.filtered(lambda i: i.media_type == 'story'))
             record.count_stories = st
     def _compute_count_audio(self):
         for record in self:
             aud = 0
             for member in record.family_tree.family_members:
-                aud += len(member.images.filtered(lambda i: i.media_type == 'audio'))
+                aud += len(member.media.filtered(lambda i: i.media_type == 'audio'))
             record.count_audio = aud
     def _compute_count_videos(self):
         for record in self:
             vid = 0
             for member in record.family_tree.family_members:
-                vid += len(member.images.filtered(lambda i: i.media_type == 'video'))
+                vid += len(member.media.filtered(lambda i: i.media_type == 'video'))
             record.count_videos = vid
     def _compute_count_sources(self):
         for record in self:

@@ -1,1 +1,28 @@
+Jen's Computer
 Postgres superuser password: admin
+
+
+Interserver
+btf9895@rit.edu
+NL...
+
+vps
+216.219.94.174
+password: fxt@RqG1
+ssh key:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCmR0bRGyNy01..
+
+
+Namecheap
+ancestrybyjen.us
+username: benjafo
+password: S2)k=UUY
+
+
+
+Odoo
+server: ancestrydev
+master password: Ancestrydev^6
+login: benjafo@gmail.com
+password: Ancestrydev@2
+
+python3 odoo-bin -d ancestry -r odoo --addons-path=addons,../odenterprise,../ancestry --http-port=8069
