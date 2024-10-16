@@ -1,0 +1,40 @@
+{% extends "ancestry/base.html" %}
+
+{% block title %}
+    Admin Page
+{% endblock %}
+
+{% block content %}
+    <h3 class="mb-4">Administration</h2>
+    <h4 class="card-title mb-4">Trees</h4>
+        <ul class="list-group mb-2">
+            {% for tree in trees.all %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    {{ tree.name }}
+                    <a href="{% url 'ancestry:admin_tree' tree.id %}" class="btn btn-sm btn-link">
+                        Edit
+                    </a>
+                </li>
+            {% empty %}
+                <li class="list-group-item text-muted">No trees yet.</li>
+            {% endfor %}
+        </ul>
+        <a href="{% url 'ancestry:admin_create_tree' %}" class="btn btn-outline-primary float-right">Add Tree</a>
+    </h4>
+    <br/>
+    <h4 class="card-title mb-4">Sources</h4>
+        <ul class="list-group mb-2">
+            {% for source in sources.all %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    {{ source.name }}
+                    <a href="{% url 'ancestry:admin_edit_source' source.id %}" class="btn btn-sm btn-link">
+                        Edit
+                    </a>
+                </li>
+            {% empty %}
+                <li class="list-group-item text-muted">No sources in this tree yet.</li>
+            {% endfor %}
+        </ul>
+        <a href="{% url 'ancestry:admin_create_source' %}" class="btn btn-outline-primary float-right">Add Source</a>
+    </h4>
+{% endblock %}

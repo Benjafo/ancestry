@@ -1,0 +1,25 @@
+{% extends "ancestry/base.html" %}
+
+{% block title %}
+    Your Cart
+{% endblock %}
+
+{% block content %}
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for cart_item in cart_items %}
+        <div class="col mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">{{ cart_item.user }}</h5>
+                    <p class="card-text">{{ cart_item.price }}</p>
+                    <p class="card-text"><strong>${{ cart_item.quantity }}</strong></p>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <p class="text-center">No products are in your cart.</p>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

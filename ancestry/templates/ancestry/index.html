@@ -1,0 +1,22 @@
+{% extends "ancestry/base.html" %}
+
+{% block title %}
+    Tree {{ tree.name }}
+{% endblock %}
+
+{% block content %}
+    {% if trees %}
+    <strong>Trees</strong>
+    <ul>
+        {% for tree in trees %}
+            <li>
+                <a href="{% url 'ancestry:tree' tree.id %}">
+                    {{ tree.name }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>No trees available.</p>
+    {% endif %}
+{% endblock %}

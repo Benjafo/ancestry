@@ -1,0 +1,18 @@
+{% extends "ancestry/base.html" %}
+
+{% block title %}
+    Tree {{ tree.name }}
+{% endblock %}
+
+{% block content %}
+    <strong>{{ tree.name }}</strong>
+    <ul>
+        {% for person in tree.members.all %}
+            <li>
+                <a href="{% url 'ancestry:person' person.id %}">
+                    {{ person.name }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
