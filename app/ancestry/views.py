@@ -15,10 +15,24 @@ def index(request):
 
 def tree(request, tree_id):
     tree = get_object_or_404(Tree, pk=tree_id)
-    members = tree.members.all()
+    root_members = tree.members.filter(father__isnull=True, mother__isnull=True)
+
+    def get_children(person):
+        return [{
+            "name": child.name,
+            "id": child.id,
+            "children": get_children(child)
+        } for child in person.children()]
+
+    tree_data = [{
+        "name": member.name,
+        "id": member.id,
+        "children": get_children(member)
+    } for member in root_members]
+
     context = {
         'tree': tree,
-        'members': members
+        'tree_data': tree_data
     }
     return render(request, 'ancestry/tree.html', context)
 

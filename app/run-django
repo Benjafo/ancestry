@@ -1,0 +1,14 @@
+#!/bin/sh
+
+python manage.py makemigrations
+python manage.py migrate
+python manage.py ensure_superuser
+python manage.py ensure_serviceuser
+
+if [ "$1" = "test" ] || [ "$1" = "testonly" ] ; then
+  python manage.py test
+fi
+
+if [ "$1" != "testonly" ]; then
+  python manage.py runserver 0.0.0.0:8000
+fi
