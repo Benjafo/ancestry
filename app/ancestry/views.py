@@ -4,6 +4,7 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse
 from .models import Event, Person, Source, Tree
 from .forms import EventForm, PersonForm, SourceForm, TreeForm
+from pprint import pprint
 
 ####################################################################################
 ## Views
@@ -15,20 +16,85 @@ def index(request):
 
 def tree(request, tree_id):
     tree = get_object_or_404(Tree, pk=tree_id)
-    root_members = tree.members.filter(father__isnull=True, mother__isnull=True)
 
-    def get_children(person):
-        return [{
-            "name": child.name,
-            "id": child.id,
-            "children": get_children(child)
-        } for child in person.children()]
+    def get_parents(member):
+        node = {
+            "name": member.name,
+            "class": "node",
+            "textClass": "nodeText",
+            "marriages": []
+        }
 
-    tree_data = [{
-        "name": member.name,
-        "id": member.id,
-        "children": get_children(member)
-    } for member in root_members]
+        if not member.father and not member.mother:
+            return node
+
+        if member.father:
+            father_node = {
+                "name": member.father.name,
+                "class": "node",
+                "textClass": "nodeText",
+                "marriages": []
+            }
+            if member.father.father or member.father.mother:
+                paternal_grandparents = get_parents(member.father)
+                father_node["marriages"].append({
+                    "spouse": {
+                        "name": paternal_grandparents.get("name", "NONE"),
+                        "class": "node",
+                        "textClass": "nodeText"
+                    },
+                    "children": paternal_grandparents.get("marriages", [])[0].get("children", []) if paternal_grandparents.get("marriages") else []
+                })
+        else:
+            father_node = {"name": "NONE", "class": "node", "textClass": "nodeText"}
+
+        if member.mother:
+            mother_node = {
+                "name": member.mother.name,
+                "class": "node",
+                "textClass": "nodeText",
+                "marriages": []
+            }
+            if member.mother.father or member.mother.mother:
+                maternal_grandparents = get_parents(member.mother)
+                mother_node["marriages"].append({
+                    "spouse": {
+                        "name": maternal_grandparents.get("name", "NONE"),
+                        "class": "node",
+                        "textClass": "nodeText"
+                    },
+                    "children": maternal_grandparents.get("marriages", [])[0].get("children", []) if maternal_grandparents.get("marriages") else []
+                })
+        else:
+            mother_node = {"name": "NONE", "class": "node", "textClass": "nodeText"}
+
+        node["marriages"].append({
+            "spouse": mother_node,
+            "children": [father_node, mother_node]
+        })
+
+        return node
+
+    # Usage
+    root_member = tree.members.get(id=1)
+    tree_data = get_parents(root_member)
+    print('TREE DATA')
+    pprint(tree_data)
+
+    # Check if tree member has children
+
+    # def get_children(person):
+    #     return [{
+    #         "name": child.name,
+    #         "id": child.id,
+    #         "children": get_children(child)
+    #     } for child in person.children()]
+
+    # tree_data = [{
+    #     "name": member.name,
+    #     "id": member.id,
+    #     "children": get_children(member)
+    # } for member in root_members]
 
     context = {
         'tree': tree,
