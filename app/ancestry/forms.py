@@ -1,6 +1,5 @@
 from django import forms
 from .models import Tree, Person, Event, Source
-from .widgets import RelatedFieldWidgetCanAdd
 
 class TreeForm(forms.ModelForm):
     class Meta:
@@ -10,7 +9,7 @@ class TreeForm(forms.ModelForm):
 class PersonForm(forms.ModelForm):
     class Meta:
         model = Person
-        fields = ['name', 'birth_date', 'death_date', 'mother', 'father', 'sources'] #, 'events']
+        fields = ['name', 'birth_date', 'death_date', 'mother', 'father', 'sources']
         widgets = {
             'birth_date': forms.DateInput(attrs={'type': 'date'}),
             'death_date': forms.DateInput(attrs={'type': 'date'})
@@ -38,17 +37,17 @@ class PersonForm(forms.ModelForm):
         required=False
     )
 
-    events = forms.ModelChoiceField(
-        required=False,
-        queryset=Event.objects.all(),
-        widget=RelatedFieldWidgetCanAdd(Event, related_url="ancestry:admin")
-    )
-
 class EventForm(forms.ModelForm):
     class Meta:
         model = Event
         fields = ['type', 'date']
         widgets = {
+            'type': forms.Select(choices=[
+                ('birth', 'Birth'),
+                ('death', 'Death'),
+                ('life_event', 'Life Event'),
+                ('marriage', 'Marriage')
+            ]),
             'date': forms.DateInput(attrs={'type': 'date'})
         }
 
@@ -57,7 +56,12 @@ class SourceForm(forms.ModelForm):
         model = Source
         fields = ['name', 'type', 'date', 'file_location']
         widgets = {
-            'type': forms.Select(choices=('document', 'photo', 'audio', 'video')),
+            'type': forms.Select(choices=[
+                ('document', 'Document'),
+                ('photo', 'Photo'),
+                ('audio', 'Audio'),
+                ('video', 'Video')
+            ]),
             'date': forms.DateInput(attrs={'type': 'date'}),
             'file_location': forms.FileInput()
         }

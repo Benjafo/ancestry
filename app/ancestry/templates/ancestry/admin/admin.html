@@ -32,7 +32,7 @@
                     </a>
                 </li>
             {% empty %}
-                <li class="list-group-item text-muted">No sources in this tree yet.</li>
+                <li class="list-group-item text-muted">No sources yet.</li>
             {% endfor %}
         </ul>
         <a href="{% url 'ancestry:admin_create_source' %}" class="btn btn-outline-primary float-right">Add Source</a>

@@ -78,8 +78,8 @@ def tree(request, tree_id):
     # Usage
     root_member = tree.members.get(id=1)
     tree_data = get_parents(root_member)
-    print('TREE DATA')
-    pprint(tree_data)
+    # print('TREE DATA')
+    # pprint(tree_data)
 
     # Check if tree member has children
 
