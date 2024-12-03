@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h1>{{ person.name }}</h2>
+    <p><strong>Birth Date:</strong> {{ person.birth_date|default:"(no value provided)" }}</p>
+    <p><strong>Death Date:</strong> {{ person.death_date|default:"(no value provided)" }}</p>
+    <p><strong>Mother:</strong> {{ person.mother|default:"(no value provided)" }}</p>
+    <p><strong>Father:</strong> {{ person.father|default:"(no value provided)" }}</p>
+
+    <h4>Events</h4>
+    {% for event in person.events.all %}
+        <p>
+            <a href="{% url 'ancestry:event' person.id event.id %}">
+                {{ event.name }}
+            </a>
+        </p>
+    {% empty %}
+        <p>No associated events.</p>
+    {% endfor %}
+
+    <h4>Sources</h4>
+    {% for source in person.sources.all %}
+        <p>
+            <a href="{% url 'ancestry:source' person.id source.id %}">
+                {{ source }}
+            </a>
+        </p>
+    {% empty %}
+        <p>No associated sources.</p>
+    {% endfor %}
+
+{% endblock %}

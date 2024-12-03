@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block title %}CRUD Panel{% endblock %}
+
+{% block content %}
+
+<div class="mgmt">
+    <div class="mgmt-box">
+        <h2>Trees</h2>
+        <input type="number" id="tree-id" placeholder="Enter Tree ID">
+        <button onclick="window.location.href='/ancestry/management/tree/create'">Create Tree</button>
+        <button onclick="window.location.href='/ancestry/tree/' + document.getElementById('tree-id').value">Read Tree</button>
+        <button onclick="window.location.href='/ancestry/management/tree/' + document.getElementById('tree-id').value + '/update'">Update Tree</button>
+        <button onclick="window.location.href='/ancestry/management/tree/' + document.getElementById('tree-id').value + '/delete'">Delete Tree</button>
+    </div>
+
+    <div class="mgmt-box">
+        <h2>People</h2>
+        <input type="number" id="person-id" placeholder="Enter Person ID">
+        <button onclick="window.location.href='/ancestry/management/person/create'">Create Person</button>
+        <button onclick="window.location.href='/ancestry/person/' + document.getElementById('person-id').value">Read Person</button>
+        <button onclick="window.location.href='/ancestry/management/person/' + document.getElementById('person-id').value + '/update'">Update Person</button>
+        <button onclick="window.location.href='/ancestry/management/person/' + document.getElementById('person-id').value + '/delete'">Delete Person</button>
+    </div>
+
+    <div class="mgmt-box">
+        <h2>Events</h2>
+        <input type="number" id="event-id" placeholder="Enter Event ID">
+        <button onclick="window.location.href='/ancestry/management/event/create'">Create Event</button>
+        <button id="readEventButton">Read Event</button>
+        <button onclick="window.location.href='/ancestry/management/event/' + document.getElementById('event-id').value + '/update'">Update Event</button>
+        <button onclick="window.location.href='/ancestry/management/event/' + document.getElementById('event-id').value + '/delete'">Delete Event</button>
+    </div>
+
+    <div class="mgmt-box">
+        <h2>Sources</h2>
+        <input type="number" id="source-id" placeholder="Enter Source ID">
+        <button onclick="window.location.href='/ancestry/management/source/create'">Create Source</button>
+        <button id="readSourceButton">Read Source</button>
+        <button onclick="window.location.href='/ancestry/management/source/' + document.getElementById('source-id').value + '/update'">Update Source</button>
+        <button onclick="window.location.href='/ancestry/management/source/' + document.getElementById('source-id').value + '/delete'">Delete Source</button>
+    </div>
+</div>
+
+<script>
+    document.getElementById('readEventButton').addEventListener('click', () => {
+        const personId = document.getElementById('person-id').value;
+        const eventId = document.getElementById('event-id').value;
+        window.location.href = `/ancestry/person/${personId}/event/${eventId}`;
+    });
+    document.getElementById('readSourceButton').addEventListener('click', () => {
+        const personId = document.getElementById('person-id').value;
+        const sourceId = document.getElementById('source-id').value;
+        window.location.href = `/ancestry/person/${personId}/source/${sourceId}`;
+    });
+</script>
+
+<style>
+    .mgmt {
+        display: flex;
+        flex-flow: row wrap;
+    }
+
+    .mgmt-box {
+        margin: 0.5em 2.5em 1em;
+        display: flex;
+        flex-direction: column;
+        width: 40%;
+    }
+
+    .mgmt-box > button {
+        margin-top: 0.25em;
+    }
+
+    h2 {
+        margin-top: 2em;
+    }
+</style>
+
+{% endblock %}

@@ -13,5 +13,3 @@ COPY app/requirements/production.txt /app/requirements/
 RUN pip install -r requirements/production.txt
 
 COPY app/ /app
-
-RUN python manage.py collectstatic --noinput

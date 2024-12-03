@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+    {% for tree in trees %}
+        <a href="{% url 'ancestry:tree' tree.id %}">{{ tree }}</p>
+    {% endfor %}
+
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}Product List{% endblock %}
+
+{% block content %}
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for product in products %}
+        <div class="col mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.name }}</h5>
+                    <p class="card-text">{{ product.description }}</p>
+                    <p class="card-text"><strong>${{ product.price }}</strong></p>
+                </div>
+                <div class="card-footer">
+                    <form method="post" action="{% url 'portal:add_to_cart' product.id %}">
+                        {% csrf_token %}
+                        <button class="btn btn-primary btn-sm" type="submit">Add to Cart</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <p class="text-center">No products available at the moment.</p>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}
