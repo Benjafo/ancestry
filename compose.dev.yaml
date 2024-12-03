@@ -1,0 +1,13 @@
+services:
+  ancestry:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    command: ./run-django
+    volumes:
+      - ./app:/app
+      - ./vols/db:/db
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env.dev

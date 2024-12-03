@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h2>Event Details</h2>
+
+    <p><strong>Type:</strong> {{ event.type|default:"(no value provided)" }}</p>
+    <p><strong>Date:</strong> {{ event.date|default:"(no value provided)" }}</p>
+
+{% endblock %}

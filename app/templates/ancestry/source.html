@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h2>{{ source.name }}</h2>
+
+    <p><strong>Type:</strong> {{ source.type|default:"(no value provided)" }}</p>
+    <p><strong>Date:</strong> {{ source.date|default:"(no value provided)" }}</p>
+    <p><strong>File Location:</strong> {{ source.file_location|default:"(no value provided)" }}</p>
+
+{% endblock %}
