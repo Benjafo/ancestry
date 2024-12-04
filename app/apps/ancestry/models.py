@@ -29,10 +29,20 @@ class Source(models.Model):
     file_location = models.CharField(max_length=200, blank=True)
 
     def __str__(self):
-        return self.name
+        return f'{self.name} ({self.type}): {self.date}'
 
 class Event(models.Model):
-    type = models.CharField(max_length=50)
+    BIRTH = 'BIRTH'
+    DEATH = 'DEATH'
+    OTHER = 'OTHER'
+
+    EVENT_TYPES = (
+        (BIRTH, 'birth'),
+        (DEATH, 'death'),
+        (OTHER, 'other'),
+    )
+
+    type = models.CharField(max_length=200, choices=EVENT_TYPES)
     date = models.DateField(blank=True, null=True)
 
     def __str__(self):

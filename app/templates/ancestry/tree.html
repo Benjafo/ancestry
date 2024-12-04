@@ -6,8 +6,12 @@
 
     <h2>{{ tree.name }}</h2>
 
-    <p><strong>Description:</strong> {{ tree.description|default:"(no value provided)" }}</p>
+    <hr/>
 
+    <strong>Description:</strong>
+    <p>{{ tree.description|default:"(no value provided)" }}</p>
+
+    <strong>Members:</strong>
     {% for member in tree.members.all %}
         <p>
             <a href="{% url 'ancestry:person' member.id %}">

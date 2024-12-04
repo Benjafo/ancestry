@@ -3,9 +3,14 @@
 {% block title %}Tree Management{% endblock %}
 
 {% block content %}
+
     <form method="post">
         {% csrf_token %}
         <p>Are you sure you want to delete "{{ object }}"?</p>
         <input type="submit" value="Confirm">
     </form>
+
+    <hr/>
+    <a href="javascript:history.back()" class="back-button">Back</a>
+
 {% endblock %}

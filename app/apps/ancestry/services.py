@@ -1,37 +1,133 @@
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
+from django.urls import reverse
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
+from .forms import PersonForm
+from .models import Event, Person, Source, Tree
 
 class ManagementService:
-    TEMPLATE_PREFIX = 'ancestry/management'
-    SUCCESS_URL = '/ancestry/management'
+    class TreeCreate(CreateView):
+        model = Tree
+        template_name = 'ancestry/management/form.html'
+        fields = ['name', 'description']
+        success_url = '/ancestry/management'
 
-    @classmethod
-    def generate_view_classes(cls, model, fields=None, create_fields=None, update_fields=None):
-        create_fields = create_fields or fields
-        update_fields = update_fields or fields
+    class TreeRead(DetailView):
+        model = Tree
+        template_name = 'ancestry/management/management_tree.html'
+        success_url = '/ancestry/management'
 
-        class Create(cls, CreateView):
-            template_name = f'{cls.TEMPLATE_PREFIX}/form.html'
-            fields = create_fields
+    class TreeUpdate(UpdateView):
+        model = Tree
+        template_name = 'ancestry/management/form.html'
+        fields = ['description']
+        success_url = '/ancestry/management'
 
-        class Read(cls, DetailView):
-            template_name = f'{cls.TEMPLATE_PREFIX}/models/{model.__name__.lower()}.html'
+    class TreeDelete(DeleteView):
+        model = Tree
+        template_name = 'ancestry/management/confirm.html'
+        fields = []
+        success_url = '/ancestry/management'
 
-        class Update(cls, UpdateView):
-            template_name = f'{cls.TEMPLATE_PREFIX}/form.html'
-            fields = update_fields
+    class PersonCreate(CreateView):
+        model = Person
+        template_name = 'ancestry/management/form.html'
+        fields = ['name', 'birth_date', 'death_date', 'mother', 'father']
+        success_url = '/ancestry/management'
 
-        class Delete(cls, DeleteView):
-            template_name = f'{cls.TEMPLATE_PREFIX}/confirm.html'
-            fields = []
+        def form_valid(self, form):
+            tree_id = self.kwargs.get('pk')
+            form.instance.tree_id = tree_id
+            return super().form_valid(form)
 
-        for view_class in (Create, Read, Update, Delete):
-            view_class.success_url = cls.SUCCESS_URL
-            view_class.model = model
+    class PersonRead(DetailView):
+        model = Person
+        template_name = 'ancestry/management/management_person.html'
 
-        return Create, Read, Update, Delete
+    class PersonUpdate(UpdateView):
+        model = Person
+        template_name = 'ancestry/management/form.html'
+        form_class=PersonForm
+
+        def get_success_url(self):
+            return reverse('ancestry:management_read_person', kwargs={'pk': self.object.id})
+
+    class PersonDelete(DeleteView):
+        model = Person
+        template_name = 'ancestry/management/confirm.html'
+        fields = []
+
+        def get_success_url(self):
+            return reverse('ancestry:management_read_tree', kwargs={'pk': self.object.tree.id})
+
+    class SourceCreate(CreateView):
+        model = Source
+        template_name = 'ancestry/management/form.html'
+        fields = ['name', 'type', 'date', 'file_location']
+
+        def form_valid(self, form):
+            person = Person.objects.get(pk=self.kwargs.get('pk'))
+            response = super().form_valid(form)
+            person.sources.add(form.instance)
+            return response
+
+        def get_success_url(self):
+            return reverse('ancestry:management_read_person', kwargs={'pk': self.kwargs['pk']})
+
+    class SourceRead(DetailView):
+        model = Source
+        template_name = 'ancestry/management/management_source.html'
+
+    class SourceUpdate(UpdateView):
+        model = Source
+        template_name = 'ancestry/management/form.html'
+        fields = ['name', 'type', 'date', 'file_location']
+
+        def get_success_url(self):
+            return reverse('ancestry:management_read_person', kwargs={'pk': self.kwargs['pk']})
+
+    class SourceDelete(DeleteView):
+        model = Source
+        template_name = 'ancestry/management/confirm.html'
+        fields = []
+
+        def get_success_url(self):
+            return reverse('ancestry:management_read_person', kwargs={'pk': self.kwargs['pk']})
+
+    class EventCreate(CreateView):
+        model = Event
+        template_name = 'ancestry/management/form.html'
+        fields = ['type', 'date']
+
+        def form_valid(self, form):
+            person = Person.objects.get(pk=self.kwargs.get('pk'))
+            response = super().form_valid(form)
+            person.events.add(form.instance)
+            return response
+
+        def get_success_url(self):
+            return reverse('ancestry:management_read_person', kwargs={'pk': self.kwargs['pk']})
+
+    class EventRead(DetailView):
+        model = Event
+        template_name = 'ancestry/management/management_event.html'
+
+    class EventUpdate(UpdateView):
+        model = Event
+        template_name = 'ancestry/management/form.html'
+        fields = ['type', 'date']
+
+        def get_success_url(self):
+            return reverse('ancestry:management_read_person', kwargs={'pk': self.kwargs['pk']})
+
+    class EventDelete(DeleteView):
+        model = Event
+        template_name = 'ancestry/management/confirm.html'
+        fields = []
+
+        def get_success_url(self):
+            return reverse('ancestry:management_read_person', kwargs={'pk': self.kwargs['pk']})
 
 class AuthenticationService:
     def login(request):

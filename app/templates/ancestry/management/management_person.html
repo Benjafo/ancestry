@@ -18,6 +18,9 @@
     {% empty %}
         <p>No associated events.</p>
     {% endfor %}
+    <a href="{% url 'ancestry:management_create_event' person.id %}" class="icon-link" title="Create Event">
+        <i class="fas fa-plus"></i>
+    </a>
 
     <h4>Sources</h4>
     {% for source in person.sources.all %}
@@ -29,5 +32,11 @@
     {% empty %}
         <p>No associated sources.</p>
     {% endfor %}
+    <a href="{% url 'ancestry:management_create_source' person.id %}" class="icon-link" title="Create Source">
+        <i class="fas fa-plus"></i>
+    </a>
+
+    <hr/>
+    <a href="javascript:history.back()" class="back-button">Back</a>
 
 {% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+    <div>
+        <h2>{{ tree.name }}</h2>
+        <strong>Description:</strong>
+        <p>{{ tree.description|default:"(no value provided)" }}</p>
+        <a href="{% url 'ancestry:management_update_tree' tree.id %}" class="icon-link" title="Edit Tree">
+            <i class="fas fa-edit"></i>
+        </a>
+    </div>
+
+    <hr/>
+
+    <strong>Members:</strong>
+    {% for member in tree.members.all %}
+        <p>
+            <a href="{% url 'ancestry:management_read_person' member.id %}">
+                {{ member.name }}
+            </a>
+            <a href="{% url 'ancestry:management_update_person' member.id %}" class="icon-link" title="Edit Person">
+                <i class="fas fa-edit"></i>
+            </a>
+            <a href="{% url 'ancestry:management_delete_person' member.id %}" class="icon-link" title="Delete Person">
+                <i class="fas fa-trash"></i>
+            </a>
+        </p>
+    {% endfor %}
+
+    <a href="{% url 'ancestry:management_create_person' tree.id %}" class="icon-link" title="Create Person">
+        <i class="fas fa-plus"></i>
+    </a>
+
+    <hr/>
+    <a href="javascript:history.back()" class="back-button">Back</a>
+
+{% endblock %}
