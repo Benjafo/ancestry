@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Management{% endblock %}
+
+{% block content %}
+    <h2>Management Panel</h2>
+    <hr/>
+
+    {% for tree in trees %}
+        <div>
+            <a href="{% url 'ancestry:management_read_tree' tree.id %}">{{ tree }}</a>
+            <a href="{% url 'ancestry:management_update_tree' tree.id %}" class="icon-link" title="Edit Tree">
+                <i class="fas fa-edit"></i>
+            </a>
+            <a href="{% url 'ancestry:management_delete_tree' tree.id %}" class="icon-link" title="Delete Tree">
+                <i class="fas fa-trash"></i>
+            </a>
+        </div>
+    {% endfor %}
+
+    <a href="{% url 'ancestry:management_create_tree' %}" class="icon-link" title="Create Tree">
+        <i class="fas fa-plus"></i>
+    </a>
+
+{% endblock %}

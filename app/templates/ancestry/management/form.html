@@ -3,9 +3,14 @@
 {% block title %}Management{% endblock %}
 
 {% block content %}
+
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <input type="submit" value="Save">
     </form>
+
+    <hr/>
+    <a href="javascript:history.back()" class="back-button">Back</a>
+
 {% endblock %}

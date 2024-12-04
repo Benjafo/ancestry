@@ -6,7 +6,7 @@ from .services import AuthenticationService, ManagementService
 ## Ancestry
 ####################################################################################
 
-def trees(request):
+def home(request):
     trees = Tree.objects.all()[:5]
     context = { 'trees': trees }
     return render(request, 'ancestry/home.html', context)
@@ -45,26 +45,17 @@ def source(request, person_id, source_id):
 def crud_panel(request):
     return render(request, 'ancestry/management/crud_panel.html')
 
-TreeCreate, TreeRead, TreeUpdate, TreeDelete = ManagementService.generate_view_classes(
-    model=Tree,
-    create_fields=['name', 'description'],
-    update_fields=['description']
-)
+def management(request):
+    context = { 'trees': Tree.objects.all() }
+    return render(request, 'ancestry/management/management.html', context)
 
-PersonCreate, PersonRead, PersonUpdate, PersonDelete = ManagementService.generate_view_classes(
-    model=Person,
-    fields=['name', 'birth_date', 'death_date', 'mother', 'father']
-)
+ManagementTreeCreate, ManagementTreeRead, ManagementTreeUpdate, ManagementTreeDelete = ManagementService.TreeCreate, ManagementService.TreeRead, ManagementService.TreeUpdate, ManagementService.TreeDelete
 
-SourceCreate, SourceRead, SourceUpdate, SourceDelete = ManagementService.generate_view_classes(
-    model=Source,
-    fields=['name', 'type', 'date', 'file_location']
-)
+ManagementPersonCreate, ManagementPersonRead, ManagementPersonUpdate, ManagementPersonDelete = ManagementService.PersonCreate, ManagementService.PersonRead, ManagementService.PersonUpdate, ManagementService.PersonDelete
 
-EventCreate, EventRead, EventUpdate, EventDelete = ManagementService.generate_view_classes(
-    model=Event,
-    fields=['type', 'date'],
-)
+ManagementSourceCreate, ManagementSourceRead, ManagementSourceUpdate, ManagementSourceDelete = ManagementService.SourceCreate, ManagementService.SourceRead, ManagementService.SourceUpdate, ManagementService.SourceDelete
+
+ManagementEventCreate, ManagementEventRead, ManagementEventUpdate, ManagementEventDelete = ManagementService.EventCreate, ManagementService.EventRead, ManagementService.EventUpdate, ManagementService.EventDelete
 
 
 ####################################################################################
